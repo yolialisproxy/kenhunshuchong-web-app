@@ -1,7 +1,7 @@
 baseURL = 'https://kenhunshuchong.web.app/'
 languageCode = 'zh-CN'
 defaultContentLanguage = "zh"
-title = '啃魂的寒舍2'
+title = '啃魂的寒舍22'
 theme = 'stack-starter'
 enableRobotsTXT = true
 hasCJKLanguage = true
