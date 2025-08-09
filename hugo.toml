@@ -1,0 +1,107 @@
+baseURL = 'https://kenhunshuchong.web.app/'
+languageCode = 'zh-CN'
+defaultContentLanguage = "zh"
+title = '啃魂的寒舍'
+theme = 'stack-starter'
+enableRobotsTXT = true
+hasCJKLanguage = true
+
+# 构建与性能
+minify = true
+
+[pagination]
+    pagerSize = 30  # 每页显示文章数
+
+[params]
+    showReadingTime = true
+    showToc = true
+    enableRelated = true
+    # 站点描述，适用于 SEO
+    description = "欢迎光临啃魂的个人博客，他的完本作品有：《龙珠之超级宗师》、《天龙天外天》（又名《书虫成神记》）、《猪妖传》、《悟道天龙》、《幸福武侠》。他已经研究写作很长时间了，相信很快会有新作品出来。"
+    keywords = ["啃魂", "龙珠之超级宗师", "天龙天外天", "书虫成神记", "猪妖传", "悟道天龙", "幸福武侠"]
+    # Google Analytics
+    googleAnalytics = "G-QDKFP4QCT8"  # 你的 GA4 ID
+    # Open Graph 配置 (社交分享卡片)
+    enableOpenGraph = true
+    ogImage = "/images/og-default.jpg" # 默认分享图
+    # 版权设置
+    copyright = "© 2025 啃魂"
+    # 网站的 Favicon
+    favicon = "/images/favicon.ico"
+
+
+# 侧边栏配置
+[params.sidebar]
+    enabled = true
+    emoji = "✍️"
+    avatar = "images/avatar.png" # 头像图片路径
+    title = "啃魂"
+    subtitle = "很想写一些让自己满意的小说，一直没做成所愿，顺便看了不少别人的，自己的完本作品有：《龙珠之超级宗师》、《天龙天外天》（又名《书虫成神记》）、《猪妖传》、《悟道天龙》、《幸福武侠》。"
+
+[params.author]
+    name = "啃魂"
+    email = "yolialisproxy@gmail.com"
+
+[params.social]
+    name = "GitHub"
+    url = "https://github.com/yolialisproxy"
+    icon = "fab fa-github"
+
+
+# 菜单配置
+[menu]
+  [[menu.main]]
+    name = "首页"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "分类"
+    url = "/categories/"
+    weight = 2
+  [[menu.main]]
+    name = "标签"
+    url = "/tags/"
+    weight = 3
+  [[menu.main]]
+    name = "归档"
+    url = "/archives/"
+    weight = 4
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 5
+
+# 网站搜索
+[params.search]
+  enable = true  # 启用搜索功能
+  type = "Lunr"  # 使用 Lunr.js 搜索引擎
+
+# 评论设置，选择 Disqus 或 Waline
+[params.comments]
+  enabled = true
+  disqusShortname = "你的disqus用户名"
+
+# SEO设置
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+# 开启 sitemap
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+
+[markup]
+    # Hugo 默认的安全设置屏蔽了 Markdown 里的 HTML 标签。如果你希望保留 HTML，可以在配置里加：
+    [markup.goldmark.renderer]
+        unsafe = true
+    [markup.highlight]
+        noClasses = false
+        style = "dracula"     # 代码高亮主题
+        lineNos = true
+    [markup.tableOfContents]
+        startLevel = 2
+        endLevel = 4

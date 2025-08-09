@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>啃魂的寒舍</title><link>https://kenhunshuchong.web.app/</link><description>Recent content on 啃魂的寒舍</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>yolialisproxy@gmail.com (啃魂)</managingEditor><webMaster>yolialisproxy@gmail.com (啃魂)</webMaster><lastBuildDate>Sat, 09 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kenhunshuchong.web.app/index.xml" rel="self" type="application/rss+xml"/><item><title>关于我</title><link>https://kenhunshuchong.web.app/about/</link><pubDate>Sat, 09 Aug 2025 00:00:00 +0000</pubDate><author>yolialisproxy@gmail.com (啃魂)</author><guid>https://kenhunshuchong.web.app/about/</guid><description>&lt;p>这是一个关于我的页面，可以写一些关于自己或博客的介绍。&lt;/p></description></item><item><title>文章归档</title><link>https://kenhunshuchong.web.app/archives/</link><pubDate>Sat, 09 Aug 2025 00:00:00 +0000</pubDate><author>yolialisproxy@gmail.com (啃魂)</author><guid>https://kenhunshuchong.web.app/archives/</guid><description>&lt;p>所有发布的文章都会在这里归档，供你查看。&lt;/p></description></item><item><title>今天第一次使用hugo构建自己的博客</title><link>https://kenhunshuchong.web.app/post/my-first-post/</link><pubDate>Fri, 08 Aug 2025 16:36:26 +0800</pubDate><author>yolialisproxy@gmail.com (啃魂)</author><guid>https://kenhunshuchong.web.app/post/my-first-post/</guid><description>&lt;p>如果不是为了实验谷歌的firebase，我或许不会这么快使用hugo，这东西虽然不难，但还是费了我好长时间，好在终于弄成了。&lt;/p>
+&lt;p>说是弄成了，可是这网站现在除了这个帖子，几乎什么内容都没有，实在太干净了！&lt;/p></description></item><item><title>因为qt的问题，害得我kde桌面都不能用了，改用gnome桌面</title><link>https://kenhunshuchong.web.app/post/%E7%BB%8F%E9%AA%8C%E5%BF%83%E5%BE%97/qt/</link><pubDate>Fri, 08 Aug 2025 16:36:26 +0800</pubDate><author>yolialisproxy@gmail.com (啃魂)</author><guid>https://kenhunshuchong.web.app/post/%E7%BB%8F%E9%AA%8C%E5%BF%83%E5%BE%97/qt/</guid><description>&lt;h2 id="202437">2024.3.7&lt;/h2>
+&lt;p>弄了好几天，才勉强把qt的问题给解决，却又不急着换回kde桌面了。&lt;/p>
+&lt;p>qt的问题主要有两个：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>qt5和qt6之间的冲突。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>so不同版本的控制。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>先说so不同版本的控制。&lt;/li>
+&lt;/ul>
+&lt;p>so不同版本的后缀不同，so后面第一个后缀是大版本，是核心，例如so.1或so.2。后面的后缀是小版本，大部分时候不用去管。我就去爱管，结果不但浪费了大量时间，还引发了更严重的问题。&lt;/p></description></item><item><title>用yay安装软件时，时常会遇上一些问题</title><link>https://kenhunshuchong.web.app/post/%E7%BB%8F%E9%AA%8C%E5%BF%83%E5%BE%97/%E7%BB%8F%E9%AA%8C%E5%BF%83%E5%BE%97-yay/</link><pubDate>Fri, 08 Aug 2025 16:36:26 +0800</pubDate><author>yolialisproxy@gmail.com (啃魂)</author><guid>https://kenhunshuchong.web.app/post/%E7%BB%8F%E9%AA%8C%E5%BF%83%E5%BE%97/%E7%BB%8F%E9%AA%8C%E5%BF%83%E5%BE%97-yay/</guid><description>&lt;h2 id="2024225">2024.2.25&lt;/h2>
+&lt;p>在用yay安装软件时，有时会用到&lt;code>yay -U 包名&lt;/code>这命令。这命令一般是用来安装那种网上下载的源代码安装包，结果往往是安装不了，报错说是包错误。这是因为网上下载的源码包大都不是以&lt;code>zst&lt;/code>结尾。这时候就需要用到&lt;code>makepkg -si&lt;/code>了。 如此一转换，接下来便能顺利安装了。&lt;/p></description></item><item><title>在Manjaro Linux系统中遇到“无法提交处理 (无效或已损坏的软件包 (PGP 签名))”的错误</title><link>https://kenhunshuchong.web.app/post/%E7%BB%8F%E9%AA%8C%E5%BF%83%E5%BE%97/pgp%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81/</link><pubDate>Fri, 08 Aug 2025 16:36:26 +0800</pubDate><author>yolialisproxy@gmail.com (啃魂)</author><guid>https://kenhunshuchong.web.app/post/%E7%BB%8F%E9%AA%8C%E5%BF%83%E5%BE%97/pgp%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81/</guid><description>&lt;h2 id="2025424">2025.4.24&lt;/h2>
+&lt;h3 id="错误无法提交处理-无效或已损坏的软件包-pgp-签名-manjaro">错误:无法提交处理 (无效或已损坏的软件包 (PGP 签名)) manjaro&lt;/h3>
+&lt;p>这通常与软件包的PGP签名验证有关。PGP签名用于确保软件包的完整性和来源的可靠性。以下是一些解决此问题的步骤：&lt;/p></description></item></channel></rss>

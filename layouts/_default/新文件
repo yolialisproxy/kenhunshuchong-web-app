@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favicon>
+  <link rel="icon" href="{{ .Site.Params.favicon }}" />
+</favicon>

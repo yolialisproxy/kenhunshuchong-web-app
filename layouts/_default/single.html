@@ -1,0 +1,13 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ .Title | htmlEscape }}",
+  "datePublished": "{{ .PublishDate.UTC.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ .Lastmod.UTC.Format "2006-01-02T15:04:05Z07:00" }}",
+  "author": { "@type": "Person", "name": "{{ .Site.Params.author }}" },
+  "image": "{{ with .Params.cover }}{{ . }}{{ else }}{{ .Site.Params.ogImage }}{{ end }}",
+  "description": "{{ with .Params.description }}{{ . | htmlEscape }}{{ else }}{{ .Summary | plainify | truncate 200 | htmlEscape }}{{ end }}",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ .Permalink }}" }
+}
+</script>
