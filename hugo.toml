@@ -105,3 +105,7 @@ minify = true
     [markup.tableOfContents]
         startLevel = 2
         endLevel = 4
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
