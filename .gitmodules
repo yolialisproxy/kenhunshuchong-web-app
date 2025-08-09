@@ -4,3 +4,6 @@
 [submodule "themes/stack-starter"]
 	path = themes/stack-starter
 	url = https://github.com/yolialisproxy/hugo-theme-stack-starter
+[submodule "themes/stack-starter"]
+	path = themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
