@@ -1,0 +1,16 @@
+comments:
+  allowedFields: ["name", "email", "comment"]
+  branch: "master" # 替换为你的主分支名称
+  commitMessage: "Add new comment for {options.slug}"
+  filename: "comment-{@timestamp}"
+  format: "yaml"
+  generatedFields:
+    date:
+      type: "date"
+      options:
+        format: "iso8601"
+  moderation: true # 启用手动审核（生成拉取请求）
+  path: "data/comments/{options.slug}" # 评论存储路径
+  requiredFields: ["name", "email", "comment"]
+  transforms:
+    email: "md5" # 加密 email
