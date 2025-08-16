@@ -1,0 +1,252 @@
+// ===================== CSS 变量定义 =====================
+:root {
+  // 颜色系统
+  --deep-purple: #6a0dad;
+  --light-purple: #f3e5f5;
+  --medium-purple: #8e44ad;
+  --accent-purple: #9e69ff;
+  --highlight-purple: #b089ff;
+  --text-dark: #222;
+  --text-light: #fff;
+  --border-color: #d8c0e0;
+
+  // 阴影系统
+  --shadow-sm: 0 2px 4px rgba(106, 13, 173, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+
+  // 动画
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-smooth: 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  // 字体
+  --font-main: 'Georgia', 'Songti SC', 'STKaiti', serif;
+
+  // 尺寸
+  --header-height: 55px;
+  --header-height-mobile: 50px;
+  --menu-icon-size: 24px;
+  --border-radius: 8px;
+  --nav-gap: 1rem;
+}
+
+// ===================== 网站头部 =====================
+.site-header {
+  background-color: transparent;
+//  background-color: rgba(106, 13, 173, 0.8); // 修正拼写错误并增强书卷紫色感
+  box-shadow: var(--shadow-md);
+  padding: 3px 6px 3px 3px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  z-index: 1000;
+  transition: var(--transition-fast);
+
+  &.is-scrolled {
+    box-shadow: var(--shadow-lg);
+    height: calc(var(--header-height) - 6px);
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    gap: var(--nav-gap);
+    width: 100%;
+    max-width: 1200px;
+  }
+}
+
+// ===================== 主导航 =====================
+.main-navigation {
+  padding: 3px 6px 3px 3px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+
+  .nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--nav-gap);
+    align-items: center;
+  }
+
+  .nav-item {
+    position: relative;
+
+    .nav-link {
+      font-family: var(--font-main);
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      color: var(--text-light);
+      background-color: var(--deep-purple);
+      backdrop-filter: blur(8px) saturate(120%);
+      -webkit-backdrop-filter: blur(8px) saturate(120%);
+      transition: var(--transition-normal);
+      display: flex;
+      align-items: center;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--accent-purple);
+        background-color: rgba(158, 105, 255, 0.1);
+        transform: translateY(-1px);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background-color: var(--accent-purple);
+        transform: translateX(-50%);
+        transition: var(--transition-normal);
+      }
+
+      &:hover::after {
+        width: 80%;
+      }
+    }
+
+    &.active .nav-link {
+      color: var(--accent-purple);
+      font-weight: 600;
+      &::after {
+        width: 80%;
+      }
+    }
+
+    &.has-dropdown {
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: translateY(-50%) rotate(45deg);
+        transition: var(--transition-fast);
+      }
+
+      .dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 120px;
+        background: var(--light-purple);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-lg);
+        padding: 0.5rem 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: var(--transition-fast);
+        z-index: 2001;
+
+        .dropdown-item {
+          display: block;
+          padding: 0.75rem 1.25rem;
+          color: var(--text-dark);
+          font-size: 1.8rem;
+          text-decoration: none;
+          transition: var(--transition-fast);
+
+          &:hover {
+            background: rgba(158, 105, 255, 0.1);
+            color: var(--deep-purple);
+          }
+        }
+      }
+
+      &:hover,
+      &:focus-within,
+      &.is-open {
+        .dropdown {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+
+        .nav-link::before {
+          transform: translateY(-50%) rotate(225deg);
+        }
+      }
+    }
+  }
+}
+
+// ===================== 移动端导航优化 =====================
+@media (max-width: 768px) {
+  .main-navigation {
+    position: fixed;
+    top: var(--header-height-mobile);
+    right: 0;
+    width: 280px;
+    max-height: calc(100vh - var(--header-height-mobile));
+    background: var(--deep-purple);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(100%);
+    transition: var(--transition-smooth);
+    overflow-y: auto;
+    z-index: 1000;
+
+    &.is-open {
+      transform: translateX(0);
+    }
+
+    .nav {
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 1rem;
+    }
+
+    .nav-item {
+      .nav-link {
+        font-size: 1.8rem;
+        padding: 0.75rem 1rem;
+        background-color: rgba(106, 13, 173, 0.95);
+
+        &:hover {
+          background: rgba(158, 105, 255, 0.1);
+          transform: none;
+        }
+
+        &::after {
+          bottom: 0.5rem;
+          left: 0.875rem;
+          right: 0.875rem;
+          width: auto;
+          transform: none;
+        }
+      }
+
+      &.has-dropdown {
+        .dropdown {
+          position: static;
+          display: none;
+          padding-left: 1rem;
+          background: transparent;
+          box-shadow: none;
+
+          &.is-open {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

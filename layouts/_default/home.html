@@ -1,0 +1,112 @@
+{{ define "main" }}
+
+<!-- ========= Hero 区 ========= -->
+<section class="hero">
+  <div class="hero__inner">
+    <h1 class="hero__title">{{ .Site.Title }}</h1>
+    {{ with .Site.Params.tagline }}
+      <p class="hero__tagline">{{ . }}</p>
+    {{ end }}
+    <img src="{{ "images/hero4" | relURL }}" alt="Hero Image" class="hero__image">
+    {{ with .Site.Params.hero_button }}
+      <a class="btn btn--primary" href="{{ .url }}">{{ .text }}</a>
+    {{ end }}
+  </div>
+</section>
+
+<!-- ========= Featured Post ========= -->
+{{ $featured := first 1 (where .Site.RegularPages "Params.featured" true) }}
+{{ if $featured }}
+  {{ with index $featured 0 }}
+    <section class="featured">
+      <h2 class="section-title">精选文章</h2>
+      <article class="featured__card card">
+        <a href="{{ .Permalink }}">
+          {{ with .Params.cover }}
+            <img class="featured__cover" src="{{ . | relURL }}" alt="">
+          {{ end }}
+          <div class="featured__content">
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Summary }}</p>
+            <span class="btn btn--ghost">阅读全文 →</span>
+          </div>
+        </a>
+      </article>
+    </section>
+  {{ end }}
+{{ end }}
+
+<!-- ========= 最近文章 ========= -->
+<section class="recent">
+  <h2 class="section-title">最新发布</h2>
+  <div class="post-grid">
+    {{ $allPages := where .Site.RegularPages "Type" "in" (slice "post" "posts") }}
+    {{ $recentPages := $allPages | first 15 }}
+    {{ range $recentPages.ByDate.Reverse }}
+      <article class="post-card card">
+        <a href="{{ .Permalink }}">
+          {{ with .Params.cover }}
+            <img class="post-card__thumb" src="{{ . | relURL }}" alt="">
+          {{ end }}
+          <h3 class="post-card__title">{{ .Title }}</h3>
+          <p class="post-card-content">{{ .Summary }}</p>
+          <time class="post-card__date">{{ .Date.Format "2006-01-02" }}</time>
+        </a>
+      </article>
+    {{ end }}
+  </div>
+</section>
+
+<!-- ========= 标签云 - 最终修复与内容增强 HTML ========= -->
+<section class="tag-cloud">
+  <h2 class="section-title">标签云</h2>
+  <p class="tag-cloud-description">探索网站的所有文章标签，点击即可查看相关主题的文章。</p>
+  <div class="tag-cloud__inner">
+    {{/*
+        [核心修复] 使用 .Site.Taxonomies.tags.ByCount 循环。
+        这里的 '.' （或循环变量）直接就是 Term 对象，它拥有 .Name, .Term, .Page 等属性。
+        $limit 参数可以控制显示多少个最热门的标签，您可以根据需要调整。
+    */}}
+    {{ $limit := default 20 .Params.tagCloudLimit }} {{/* 可以通过页面front matter配置标签数量 */}}
+    {{ range first $limit .Site.Taxonomies.tags.ByCount }} {{/* 这里的 . 就是 Term 对象 */}}
+
+      {{/* 尝试获取对应此标签的Term Page对象（例如 /tags/hugo/_index.md）*/}}
+      {{ $termPage := .Page }}
+
+      <a class="term-badge" href="{{ .Page.RelPermalink }}"> {{/* Term对象的.Page.RelPermalink是其页面的链接 */}}
+        <span class="term-name">
+          {{ if $termPage }}
+            {{/* 如果有对应的_index.md页面，优先使用其Title (更加人类可读) */}}
+            {{ $termPage.Title | default .Name }}
+          {{ else }}
+            {{/* 如果没有对应的_index.md页面，退回到Term对象的.Name（通常也是可读的名称） */}}
+            {{ .Name | default .Term | humanize }}
+          {{ end }}
+        </span>
+        <span class="term-count">({{ .Count }})</span>
+
+        {{ with $termPage }} {{/* 现在使用 $termPage 来获取描述 */}}
+            {{ if .Params.description }}
+              <span class="term-description">{{ .Params.description }}</span>
+            {{ else if .Summary }}
+              <span class="term-description">{{ .Summary | truncate 50 }}</span>
+            {{ end }}
+        {{ end }}
+      </a>
+    {{ end }}
+  </div>
+</section>
+
+
+
+<!-- ========= 订阅区 ========= -->
+<section class="cta">
+  <h2>订阅更新</h2>
+  <p>输入邮箱即可收到最新文章通知。</p>
+  <form class="cta__form">
+    <input type="email" placeholder="you@example.com" required>
+    <button class="btn btn--primary" type="submit">订阅</button>
+  </form>
+</section>
+
+{{ end }}

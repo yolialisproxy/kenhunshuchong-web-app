@@ -1,0 +1,98 @@
+/* 页脚整体容器 */
+.site-footer {
+  background: linear-gradient(
+    180deg,
+    var(--deep-purple) 0%,
+    var(--bookish-dark-purple) 100%
+  ); /* 渐变增强层次感 */
+  color: var(--text-light);
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 -2px 12px rgba(75, 48, 110, 0.65);
+  position: relative;
+  z-index: 10;
+
+  /* 背景叠加轻雾感 */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 50% 10%,
+      rgba(255, 255, 255, 0.05) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+/* 内部内容区域 */
+.footer {
+  background-color: rgba(34, 24, 54, 0.6); /* 半透明深紫叠加 */
+  backdrop-filter: blur(4px); /* 毛玻璃效果 */
+  color: var(--text-light);
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 1.4rem;
+  border-top: 2px solid var(--medium-purple);
+  border-radius: 0 0 8px 8px; /* 圆角柔化视觉 */
+  transition: background-color 0.3s ease;
+
+  p {
+    margin: 0.4rem 0;
+    font-size: 1.3rem;
+    color: var(--bookish-text);
+  }
+
+  /* 链接样式 */
+  a {
+    color: var(--bookish-light-purple);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      color: var(--accent-purple);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* 社交媒体链接区 */
+.footer .social-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* 防止小屏溢出 */
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+
+  a {
+    color: var(--bookish-light-purple);
+    font-size: 2.2rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      color: var(--accent-purple);
+      transform: scale(1.12);
+    }
+  }
+}
+
+/* 版权信息 */
+.footer .copyright {
+  font-size: 1.2rem;
+  color: var(--bookish-text);
+  margin-top: 1.2rem;
+  opacity: 0.85;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .footer {
+    font-size: 1.3rem;
+    padding: 1.5rem;
+  }
+  .footer .social-links {
+    gap: 1rem;
+  }
+}

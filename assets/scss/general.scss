@@ -1,0 +1,162 @@
+/* ===== 主题配色（书卷气） ===== */
+$color-light-purple: #d8c2f0;  // 浅紫
+$color-deep-purple: #2a1b3d;   // 深紫（背景主色）
+$color-dark-gray: #1a1a1a;     // 特别深色
+$color-muted-purple: #a38fc6;  // 辅助紫灰
+$color-paper: #f8f5f0;         // 仿宣纸色（明亮文字）
+$color-card-bg: rgba(74, 39, 112, 0.85); // 半透明卡片背景
+$radius: 10px;
+$shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+/* ===== 链接样式 ===== */
+a {
+    text-decoration: none;
+    color: $color-light-purple;
+    font-family: "Songti SC", "Noto Serif SC", serif;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $color-paper;
+    }
+
+    &.link {
+        box-shadow: inset 0 -2px 0 rgba($color-muted-purple, 0.4);
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: inset 0 -2px 0 rgba($color-muted-purple, 0.2);
+        }
+    }
+}
+
+/* ===== 小节标题 ===== */
+.section-title {
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: block;
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    font-family: "Songti SC", "Noto Serif SC", serif;
+    color: $color-paper;
+    background-color: rgba($color-deep-purple, 0.9); /* 半透明深紫 */
+    padding: 0.5rem 0.75rem;
+    border-left: 4px solid $color-muted-purple;
+    border-radius: 4px;
+
+    a {
+        color: $color-paper;
+
+        &:hover {
+            color: $color-light-purple;
+        }
+    }
+}
+
+/* ===== 特别深色强调块 ===== */
+.dark-highlight {
+    background-color: $color-dark-gray;
+    color: $color-light-purple;
+    padding: 1rem 1.2rem;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+}
+
+/* ===== 文章内容基础样式 ===== */
+.article-content {
+    background-color: rgba($color-deep-purple, 0.85); // 半透明主背景
+    color: $color-paper;
+    padding: 2rem;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    line-height: 1.8;
+
+    p {
+        margin-bottom: 1.2rem;
+    }
+
+    blockquote {
+        border-left: 4px solid $color-muted-purple;
+        background-color: rgba($color-muted-purple, 0.1);
+        padding: 1rem 1.5rem;
+        margin: 2rem 0;
+        font-style: italic;
+        border-radius: 6px;
+    }
+
+    code {
+        font-family: monospace;
+        background-color: rgba(255, 255, 255, 0.08);
+        padding: 0.2em 0.4em;
+        border-radius: 4px;
+        color: $color-light-purple;
+    }
+
+    pre {
+        background-color: rgba($color-dark-gray, 0.9);
+        color: $color-paper;
+        padding: 1rem 1.5rem;
+        border-radius: $radius;
+        overflow-x: auto;
+
+        code { background: transparent; }
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: $radius;
+        margin: 2rem 0;
+        display: block;
+        box-shadow: $shadow;
+    }
+}
+
+/* ===== 标签样式 ===== */
+$tag-backgrounds: #b89fd4, #cfa7e6, #9b7fc6, #ffb3d1, #a07acc;
+$tag-colors: #fff, #fff, #fff, #fff, #fff;
+
+@for $i from 1 through length($tag-backgrounds) {
+    .tag-#{$i} {
+        background-color: nth($tag-backgrounds, $i);
+        color: nth($tag-colors, $i);
+        border-radius: 4px;
+        padding: 0.3em 0.6em;
+        font-size: 0.9rem;
+        display: inline-block;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+    }
+}
+
+/* ===== 响应式调整 ===== */
+@media (max-width: 768px) {
+    .article-content {
+        padding: 1rem;
+    }
+
+    .dark-highlight {
+        padding: 0.8rem;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    a.link {
+        box-shadow: inset 0 -1.5px 0 rgba($color-muted-purple, 0.4);
+    }
+}

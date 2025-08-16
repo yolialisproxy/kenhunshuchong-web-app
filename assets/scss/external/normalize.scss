@@ -1,0 +1,153 @@
+/* === Normalize + Literary Purple Theme (Bright + Semi-transparent) === */
+
+/* 基础配色变量 */
+$color-bg-dark: rgba(42, 26, 64, 0.95); // 深紫背景 + 半透明
+$color-bg-deep: rgba(26, 26, 26, 0.9);  // 特别深色区域（深灰）
+$color-text-main: #d6c4e9; // 浅紫正文
+$color-text-accent: #c0a6e8; // 强调浅紫
+$color-link: #b28dd9; // 链接
+$color-link-hover: #d8b8ff;
+$color-border: rgba(214, 196, 233, 0.3); // 半透明边框
+
+$font-serif: "Noto Serif SC", "Songti SC", serif;
+$font-mono: "Fira Code", monospace;
+
+/* === 全局基础 === */
+html {
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  background-color: $color-bg-dark;
+  color: $color-text-main;
+  font-family: $font-serif;
+}
+
+body {
+  margin: 0;
+  background-color: $color-bg-dark;
+  color: $color-text-main;
+  font-family: $font-serif;
+  padding: 1rem;
+  backdrop-filter: blur(6px); // 半透明模糊
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* === 链接 === */
+a {
+  background-color: transparent;
+  color: $color-link;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba($color-link, 0.5);
+  transition: color 0.3s, border-color 0.3s;
+
+  &:hover,
+  &:focus {
+    color: $color-link-hover;
+    border-bottom-color: $color-link-hover;
+    text-decoration: underline;
+  }
+}
+
+/* === 标题 === */
+h1, h2, h3, h4, h5, h6 {
+  color: $color-text-accent;
+  font-family: $font-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+}
+
+/* === 水平线 === */
+hr {
+  border: none;
+  border-top: 1px solid $color-border;
+  margin: 2em 0;
+}
+
+/* === 代码块 / 内联代码 === */
+pre, code, kbd, samp {
+  font-family: $font-mono;
+  background-color: rgba($color-bg-deep, 0.85);
+  color: $color-text-main;
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+/* === 表单控件 === */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0;
+  background-color: rgba($color-bg-deep, 0.9);
+  color: $color-text-main;
+  border: 1px solid $color-border;
+  border-radius: 4px;
+  padding: 0.5em 0.75em;
+  transition: border-color 0.3s;
+}
+
+button:hover,
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: $color-link;
+}
+
+/* === 强调文字 === */
+strong, b {
+  font-weight: bolder;
+  color: $color-text-accent;
+}
+
+small {
+  font-size: 80%;
+}
+
+abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+/* === 图片 === */
+img {
+  border-style: none;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* === 隐藏元素 === */
+[hidden], template {
+  display: none;
+}
+
+/* === 卡片 / 内容块（可复用） === */
+.card {
+  background-color: rgba(52, 34, 85, 0.85); // 半透明紫色
+  color: $color-text-main;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  margin: 1rem 0;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
+}
+
+/* === 深灰强调区 === */
+.deep-section {
+  background-color: rgba(26, 26, 26, 0.9);
+  color: $color-text-main;
+  padding: 1.5rem;
+  border-left: 4px solid $color-text-accent;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}

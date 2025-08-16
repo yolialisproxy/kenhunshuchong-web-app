@@ -1,0 +1,95 @@
+/* ===== 紫韵书卷风 Chroma 配色（明亮半透明） ===== */
+$syntax-bg: rgba(43, 29, 59, 0.85);       // 半透明深紫
+$syntax-bg-dark: rgba(30, 21, 40, 0.9);   // 更深的半透明紫
+$syntax-fg: #f2e6fa;                      // 浅紫纸张文字
+$syntax-accent-1: #b28dd9;
+$syntax-accent-2: #d4b3f7;
+$syntax-accent-dark: #9370c7;
+$syntax-error: #ff66aa;
+$syntax-keyword: #cba6f7;
+$syntax-name: #a6f4d7;
+$syntax-literal: #f7d89c;
+$syntax-string: #f2c9f0;
+$syntax-comment: #9e91b8;
+
+/* ===== 代码块容器 ===== */
+.chroma {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: $syntax-bg;
+  backdrop-filter: blur(6px); /* 半透明模糊效果 */
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  margin: 1.5rem 0;
+}
+
+/* ===== 顶部语言标签 ===== */
+.chroma::before {
+  content: attr(data-lang);
+  display: block;
+  background: linear-gradient(90deg, $syntax-bg-dark, $syntax-accent-2);
+  color: $syntax-fg;
+  font-family: "STKaiti", "KaiTi", "FangSong", serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+/* ===== 花边装饰 ===== */
+.chroma::after {
+  content: "";
+  position: absolute;
+  top: 0.4rem;
+  right: 0.6rem;
+  width: 2rem;
+  height: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='%23c39be3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 Q60 30 100 50 Q60 70 50 100 Q40 70 0 50 Q40 30 50 0 Z'/%3E%3C/svg%3E");
+  background-size: cover;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* ===== 代码文本 ===== */
+.chroma code,
+.chroma pre {
+  background: transparent;
+  margin: 0;
+  padding: 1rem;
+  color: $syntax-fg;
+  font-family: "Fira Code", "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $syntax-accent-2 $syntax-bg-dark;
+}
+
+/* ===== 滚动条美化 ===== */
+.chroma pre::-webkit-scrollbar {
+  height: 6px;
+}
+.chroma pre::-webkit-scrollbar-thumb {
+  background: $syntax-accent-2;
+  border-radius: 3px;
+}
+.chroma pre::-webkit-scrollbar-track {
+  background: $syntax-bg-dark;
+}
+
+/* ===== 常见高亮语法 ===== */
+.chroma .err { color: $syntax-error; font-weight: bold; }
+.chroma .k   { color: $syntax-keyword; font-weight: 600; }
+.chroma .n   { color: $syntax-name; }
+.chroma .l   { color: $syntax-literal; }
+.chroma .s   { color: $syntax-string; }
+.chroma .c   { color: $syntax-comment; font-style: italic; opacity: 0.8; }
+
+/* ===== 辅助增强 ===== */
+.chroma .pun { color: $syntax-fg; } // 标点符号
+.chroma .op  { color: $syntax-fg; } // 操作符
+.chroma .built_in { color: $syntax-accent-1; font-weight: 500; }
+.chroma .function { color: $syntax-accent-2; }

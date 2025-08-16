@@ -1,0 +1,12 @@
+// partials/_mixins.scss
+
+@mixin translucent-bg($color, $opacity: 0.7) {
+  background-color: rgba($color, $opacity);
+}
+
+// UPGRADE: 新增一个 mixin 用于创建 Glassmorphism (毛玻璃) 效果
+@mixin glass-effect($color, $blur: 12px, $opacity: 0.16) {
+  background-color: rgba($color, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur); // 兼容 Safari
+}

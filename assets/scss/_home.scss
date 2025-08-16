@@ -1,0 +1,320 @@
+// @import "theme"; // 如果变量在独立文件中，请取消此行注释。
+// 根据您的要求，所有变量已包含在此文件中并进行了优化。
+
+// ==========================================================================
+// 1. 主题变量 (THEME VARIABLES)
+// ==========================================================================
+
+// --------------------------------------------------------------------------
+// 色彩 (Colors)
+// --------------------------------------------------------------------------
+$primary-light-purple: #e6e0ff;
+$primary-medium-purple: #9353d3;
+$primary-dark-purple: #5227ad;
+$primary-accent-purple: #bb86fc;
+
+$text-light: #ffffff;
+$text-emphasis: #f5f0ff; // 在深色背景上使用的强调文本色
+$text-dark: #2a2a2a;
+
+$bg-card: #fff9ff; // 卡片背景色，轻微偏离纯白
+
+// --------------------------------------------------------------------------
+// 排版 (Typography)
+// --------------------------------------------------------------------------
+$font-main: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', 'Arial', sans-serif; // [4]
+
+// --------------------------------------------------------------------------
+// 布局与尺寸 (Layout & Sizing)
+// --------------------------------------------------------------------------
+$radius: 18px;
+$radius-pill: 28px;
+
+// --------------------------------------------------------------------------
+// 效果 (Effects)
+// --------------------------------------------------------------------------
+$shadow: 0 4px 24px rgba($primary-medium-purple, 0.08);
+$shadow-hover: 0 8px 28px rgba($primary-dark-purple, 0.20);
+$transition: 0.25s cubic-bezier(0.39, 0.575, 0.565, 1); // 平滑的过渡动画曲线
+
+// ==========================================================================
+// 2. 混合与占位符 (MIXINS & PLACEHOLDERS)
+// ==========================================================================
+
+// 半透明背景混合宏
+@mixin translucent-bg($color, $opacity: 0.7) {
+  background-color: rgba($color, $opacity);
+}
+
+// 卡片类元素的基础样式，保持代码的 DRY (Don't Repeat Yourself)
+%card-base {
+  position: relative;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  color: $text-dark;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  z-index: 2;
+  transition: box-shadow $transition, transform $transition;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba($bg-card, 0.65); // 使用卡片背景色实现玻璃效果
+    backdrop-filter: blur(12px) saturate(150%); // 增强的玻璃拟态效果
+    border-radius: $radius;
+    z-index: -1;
+    pointer-events: none;
+    border: 1px solid rgba($primary-light-purple, 0.5);
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:hover {
+      box-shadow: $shadow-hover;
+      transform: translateY(-4px);
+  }
+}
+
+// ==========================================================================
+// 3. 基础与全局样式 (BASE & GLOBAL STYLES)
+// ==========================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-main;
+  color: $primary-dark-purple;
+  line-height: 1.7;
+  background-color: $primary-light-purple;
+  background-image:
+    linear-gradient(135deg, rgba($primary-light-purple, 0.3), rgba($primary-medium-purple, 0.35)),
+    url('/images/background.jpg'); // [5]
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+
+// ==========================================================================
+// 4. 组件样式 (COMPONENT STYLES)
+// ==========================================================================
+
+// --------------------------------------------------------------------------
+// 导航栏 (Navbar)
+// --------------------------------------------------------------------------
+.navbar {
+  position: sticky; // 改为吸顶导航，提升体验
+  top: 0;
+  width: 100%;
+  background-color: rgba($primary-medium-purple, 0.88);
+  backdrop-filter: blur(10px);
+  color: $text-light;
+  box-shadow: 0 4px 22px rgba($primary-dark-purple, 0.17);
+  z-index: 1100;
+  border-bottom: 1px solid rgba($primary-light-purple, 0.2);
+
+  .nav-title, .nav-item {
+    color: $text-emphasis;
+    font-weight: 600;
+    text-shadow: 0 1px 8px rgba(50, 11, 110, 0.20);
+    transition: color $transition;
+
+    &:hover, &:focus-visible {
+      color: $primary-accent-purple;
+      outline: none;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// 英雄区域 (Hero Section)
+// --------------------------------------------------------------------------
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 5rem 1.5rem 6rem;
+  color: $primary-dark-purple;
+  overflow: hidden; // 防止背景元素溢出
+  z-index: 2;
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25; // 降低图片透明度，使文字更突出
+    z-index: -2;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba($primary-light-purple, 0.1), rgba($primary-dark-purple, 0.25));
+  }
+
+  &__title {
+    color: $primary-dark-purple; // 改为深色以获得更好的对比度
+    font-size: 3.5rem;
+    font-weight: 800;
+    text-shadow:
+      0 3px 15px rgba($primary-dark-purple, 0.1),
+      0 1px 2px rgba($primary-light-purple, 0.5);
+    z-index: 2;
+    position: relative;
+    display: inline-block;
+    border-bottom: 3px solid $primary-accent-purple;
+    padding: 0 1rem 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1.5px;
+  }
+
+  &__tagline {
+    color: $text-dark;
+    opacity: 0.95;
+    z-index: 2;
+    font-size: 1.5rem;
+    position: relative;
+    text-shadow: 0 2px 8px rgba($primary-light-purple, 0.3);
+  }
+}
+
+// --------------------------------------------------------------------------
+// 卡片与小部件 (Cards & Widgets)
+// --------------------------------------------------------------------------
+.sidebar, .left-sidebar, .right-sidebar, .featured,
+.featured__card, .cta, .post-card, .tag-cloud {
+  @extend %card-base; // 使用占位符，保持代码整洁
+}
+
+// --------------------------------------------------------------------------
+// 文章标题 (Post Titles)
+// --------------------------------------------------------------------------
+.recent-post-title, .post-title {
+  color: $primary-dark-purple;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: left;
+  margin: 0.5rem 0 1.2rem 0;
+  text-shadow: 0 1px 1px rgba($primary-light-purple, 0.7);
+  background: rgba($primary-accent-purple, 0.1);
+  border-left: 5px solid $primary-medium-purple;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0 $radius $radius 0;
+}
+
+// --------------------------------------------------------------------------
+// 按钮 (Buttons)
+// --------------------------------------------------------------------------
+.btn {
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: $radius-pill;
+  outline: none;
+  margin: 0.25rem;
+  padding: 0.8rem 2.2rem;
+  text-decoration: none; // 确保 <a> 标签样式的按钮没有下划线
+  transition: background-color $transition, color $transition, box-shadow $transition, transform $transition;
+
+  &--primary {
+    background: linear-gradient(95deg, $primary-accent-purple, $primary-medium-purple);
+    color: $text-light;
+    box-shadow: $shadow;
+
+    &:hover, &:focus-visible {
+      background: linear-gradient(95deg, darken($primary-accent-purple, 5%), darken($primary-medium-purple, 5%));
+      color: $text-light;
+      box-shadow: $shadow-hover;
+      transform: translateY(-3px);
+      outline: none;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    border: 2px solid $primary-medium-purple;
+    color: $primary-medium-purple;
+
+    &:hover, &:focus-visible {
+      background: $primary-medium-purple;
+      color: $text-light;
+      box-shadow: $shadow;
+      transform: translateY(-2px);
+      outline: none;
+    }
+  }
+}
+
+
+
+// ==========================================================================
+// 5. 响应式布局 (RESPONSIVE STYLES)
+// ==========================================================================
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 1rem 5rem;
+    &__title {
+      font-size: 2.8rem;
+    }
+    &__tagline {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .sidebar, .left-sidebar, .right-sidebar, .featured,
+  .post-card, .featured__card, .cta, .tag-cloud {
+    padding: 1.2rem 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .navbar { font-size: 1.04rem; }
+  .recent-post-title, .post-title { font-size: 1.4rem; }
+}
+
+@media (max-width: 420px) {
+  .post-grid { grid-template-columns: 1fr !important; }
+}
+
+// ==========================================================================
+// 6. 无障碍功能 (ACCESSIBILITY)
+// ==========================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+      scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

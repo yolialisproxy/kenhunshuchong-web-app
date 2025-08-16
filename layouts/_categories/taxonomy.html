@@ -1,0 +1,39 @@
+{{ define "main" }}
+<section class="taxonomy-single">
+    <header class="taxonomy-header">
+        <h1>分类：{{ .Title }}</h1>
+        <p class="taxonomy-description">
+            共 {{ len .Pages }} 篇文章
+            {{ with .Params.description }}
+                | {{ . }}
+            {{ end }}
+        </p>
+    </header>
+
+    <!-- 按年份分组显示文章 -->
+    {{ range .Pages.GroupByDate "2006" }}
+        <div class="year-group">
+            <h2 class="year-title">{{ .Key }} 年</h2>
+            <div class="year-posts">
+                {{ range .Pages }}
+                    <article class="timeline-post">
+                        <time class="post-date">{{ .Date.Format "01-02" }}</time>
+                        <div class="post-info">
+                            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                            <p class="post-summary">{{ .Summary | truncate 100 }}</p>
+
+                            {{ with .GetTerms "tags" }}
+                                <div class="post-tags">
+                                    {{ range first 3 . }}
+                                        <span class="tag-mini">#{{ .LinkTitle }}</span>
+                                    {{ end }}
+                                </div>
+                            {{ end }}
+                        </div>
+                    </article>
+                {{ end }}
+            </div>
+        </div>
+    {{ end }}
+</section>
+{{ end }}

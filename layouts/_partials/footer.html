@@ -1,0 +1,16 @@
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <p>&copy; 2025 啃魂 保留所有权利。</p>
+        </div>
+
+        <!-- 社交媒体链接 -->
+        {{ with site.Params.social }}
+            <div class="social-links">
+                {{ range . }}
+                     <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+                {{ end }}
+            </div>
+        {{ end }}
+    </div>
+</footer>

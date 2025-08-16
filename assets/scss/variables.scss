@@ -1,0 +1,277 @@
+/* ==========================
+   1. 全局变量 (Light Purple / 半透明主题)
+   ========================== */
+:root {
+  /* 顶部间距 */
+  --main-top-padding: 35px;
+
+  /* 背景与主题色 */
+  --body-background: rgba(48, 25, 73, 0.85); /* 深紫半透明 */
+  --accent-color: #c9b6e4;
+  --accent-color-darker: #a38cc7;
+  --accent-color-text: #fff;
+  --body-text-color: #dcd2ec;
+
+  /* 标签 */
+  --tag-border-radius: 4px;
+
+  /* 间距 */
+  --section-separation: 40px;
+
+  /* 滚动条 */
+  --scrollbar-thumb: rgba(201, 182, 228, 0.5);
+  --scrollbar-track: rgba(48, 25, 73, 0.6);
+
+  /* 字体 */
+  --sys-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Droid Sans", "Helvetica Neue";
+  --zh-font-family: "PingFang SC", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei";
+  --base-font-family: "Lora", "Songti SC", var(--sys-font-family), var(--zh-font-family), serif;
+  --code-font-family: Menlo, Monaco, Consolas, "Courier New", var(--zh-font-family), monospace;
+
+  /* 卡片 */
+  --card-background: rgba(61, 43, 93, 0.85);
+  --card-background-selected: rgba(82, 65, 115, 0.85);
+  --card-text-color-main: #f4f0fa;
+  --card-text-color-secondary: #c9b6e4;
+  --card-text-color-tertiary: #a998c7;
+  --card-separator-color: rgba(201, 182, 228, 0.3);
+  --card-border-radius: 10px;
+  --card-padding: 20px;
+
+  /* 阴影 */
+  --shadow-l1: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-l2: 0px 10px 20px rgba(0, 0, 0, 0.18);
+  --shadow-l3: 0px 10px 20px rgba(0, 0, 0, 0.22);
+  --shadow-l4: 0px 24px 32px rgba(0, 0, 0, 0.25);
+
+  /* 文章字体 */
+  --article-font-family: var(--base-font-family);
+  --article-font-size: 1.6rem;
+  --article-line-height: 1.85;
+
+  /* blockquote */
+  --blockquote-border-size: 4px;
+  --blockquote-background-color: rgba(255, 255, 255, 0.05);
+
+  /* 链接高亮 */
+  --link-background-color: 201, 182, 228; /* RGB for浅紫 */
+  --link-background-opacity: 0.4;
+  --link-background-opacity-hover: 0.6;
+
+  /* 代码块 */
+  --pre-background-color: rgba(74, 39, 112, 0.95);
+  --pre-text-color: #f4f0fa;
+  --code-background-color: rgba(255, 255, 255, 0.08);
+  --code-text-color: #d6c5ec;
+
+  /* 表格 */
+  --table-border-color: #6a558c;
+  --tr-even-background-color: rgba(255, 255, 255, 0.05);
+
+  /* KBD */
+  --kbd-border-color: #8d77aa;
+
+  /* 其他 */
+  --menu-icon-separation: 40px;
+  --container-padding: 15px;
+  --widget-separation: var(--section-separation);
+}
+
+/* ==========================
+   2. 响应式覆盖
+   ========================== */
+@media (min-width: 768px) {
+  :root {
+    --article-font-size: 1.7rem;
+    --card-padding: 25px;
+  }
+}
+@media (min-width: 1200px) {
+  :root {
+    --main-top-padding: 50px;
+    --card-padding: 30px;
+  }
+}
+
+/* ==========================
+   3. 标签数组
+   ========================== */
+$tag-backgrounds: (
+  tag1: #b89fd4,
+  tag2: #cfa7e6,
+  tag3: #9b7fc6,
+  tag4: #ffb3d1,
+  tag5: #a07acc
+);
+
+$tag-colors: (
+  tag1: #fff,
+  tag2: #fff,
+  tag3: #fff,
+  tag4: #fff,
+  tag5: #fff
+);
+
+@each $name, $bg in $tag-backgrounds {
+  .tag-#{$name} {
+    background-color: $bg;
+    color: map-get($tag-colors, $name);
+    border-radius: 4px;
+    padding: 0.3em 0.6em;
+    font-size: 0.9rem;
+    display: inline-block;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+$defaultTagBackgrounds: #b89fd4, #cfa7e6, #9b7fc6, #ffb3d1, #a07acc;
+$defaultTagColors: #fff, #fff, #fff, #fff, #fff;
+
+@for $i from 1 through length($defaultTagBackgrounds) {
+  .tag-#{$i} {
+    background-color: nth($defaultTagBackgrounds, $i);
+    color: nth($defaultTagColors, $i);
+    border-radius: 4px;
+    padding: 0.3em 0.6em;
+    font-size: 0.9rem;
+    display: inline-block;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+
+/* ==========================
+   4. 全局卡片样式
+   ========================== */
+.card {
+  background: var(--card-background);
+  color: var(--card-text-color-main);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--shadow-l1);
+  transition: transform 0.28s cubic-bezier(.2,.7,.2,1), box-shadow 0.28s cubic-bezier(.2,.7,.2,.2);
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-l2);
+  }
+
+  h3, h4, h5 {
+    color: var(--card-text-color-secondary);
+  }
+
+  p {
+    color: var(--card-text-color-tertiary);
+  }
+}
+
+/* ==========================
+   5. 文章内容样式
+   ========================== */
+.article-content {
+  font-family: var(--article-font-family);
+  font-size: var(--article-font-size);
+  line-height: var(--article-line-height);
+  color: var(--body-text-color);
+  background: rgba(74, 39, 112, 0.85); /* 半透明背景 */
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+
+  h1,h2,h3,h4,h5,h6 {
+    color: var(--accent-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  blockquote {
+    border-left: var(--blockquote-border-size) solid var(--accent-color-darker);
+    background-color: var(--blockquote-background-color);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+  }
+
+  code {
+    font-family: var(--code-font-family);
+    background-color: var(--code-background-color);
+    color: var(--code-text-color);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+  }
+
+  pre {
+    background-color: var(--pre-background-color);
+    color: var(--pre-text-color);
+    padding: 1.5rem;
+    border-radius: 10px;
+    overflow-x: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid var(--table-border-color);
+    tr:nth-child(even) {
+      background-color: var(--tr-even-background-color);
+    }
+    th, td {
+      border: 1px solid var(--table-border-color);
+      padding: 0.8rem;
+    }
+  }
+}
+
+/* ==========================
+   6. 链接 & hover
+   ========================== */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  background-color: rgba(var(--link-background-color), var(--link-background-opacity));
+  padding: 0.1em 0.25em;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: rgba(var(--link-background-color), var(--link-background-opacity-hover));
+  }
+}
+
+/* ==========================
+   7. 文章滚动条
+   ========================== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track);
+}
+
+/* ==========================
+   8. 无障碍动画减弱
+   ========================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

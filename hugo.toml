@@ -1,52 +1,106 @@
-baseURL = 'https://kenhunshuchong.web.app/'
+baseURL = '/'
 languageCode = 'zh-CN'
-defaultContentLanguage = "zh"
-title = '啃魂的寒舍22'
-theme = 'stack-starter'
+title = '啃魂的寒舍'
+#theme = 'stack'
 enableRobotsTXT = true
 hasCJKLanguage = true
+disableKinds = ["RSS", "sitemap", "robotsTXT"] # 不要禁用
+# 版权设置
+copyright = "© 2025 啃魂"
+
+show_recent_posts = true # show recent posts on the homepage
 
 # 构建与性能
 minify = true
 
+# RSS配置
+rssLimit = 20
+
+mainSections = ["post",'posts',"notes"]
+
+[permalinks]
+posts = "/posts/:title/"
+
+# 分页
 [pagination]
-    pagerSize = 30  # 每页显示文章数
+disableAliases = false
+path = 'page'
+pagerSize = 30  # 每页显示文章数
 
 [params]
-    showReadingTime = true
-    showToc = true
-    enableRelated = true
-    # 站点描述，适用于 SEO
-    description = "欢迎光临啃魂的个人博客，他的完本作品有：《龙珠之超级宗师》、《天龙天外天》（又名《书虫成神记》）、《猪妖传》、《悟道天龙》、《幸福武侠》。他已经研究写作很长时间了，相信很快就会有新作品出来。"
-    keywords = ["啃魂", "龙珠之超级宗师", "天龙天外天", "书虫成神记", "猪妖传", "悟道天龙", "幸福武侠"]
-    # Google Analytics
-    googleAnalytics = "G-QDKFP4QCT8"  # 你的 GA4 ID
-    # Open Graph 配置 (社交分享卡片)
-    enableOpenGraph = true
-    ogImage = "/images/og-default.jpg" # 默认分享图
-    # 版权设置
-    copyright = "© 2025 啃魂"
-    # 网站的 Favicon
-    favicon = "/images/favicon.ico"
+tagline = "分享技术 · 记录生活"
+hero_preload = "/images/hero"
+placeholderImage = "/images/placeholder.jpg"
+showReadingTime = true
+showToc = true
+enableRelated = true
+categories = true
+tags = true
+search = true
+cover = true
+assetsDir = "assets"
+fingerprint = true
 
+# 站点描述，适用于 SEO
+description = "欢迎光临啃魂的个人博客，他的完本作品有：《龙珠之超级宗师》、《天龙天外天》（又名《书虫成神记》）、《猪妖传》、《悟道天龙》、《幸福武侠》。他已经研究写作很长时间了，相信很快就会有新作品出来。"
+keywords = ["啃魂", "龙珠之超级宗师", "天龙天外天", "书虫成神记", "猪妖传", "悟道天龙", "幸福武侠"]
+# Google Analytics
+googleAnalytics = "G-QDKFP4QCT8"  # 你的 GA4 ID
+# Open Graph 配置 (社交分享卡片)
+enableOpenGraph = true
+ogImage = "/images/og-default.jpg" # 默认分享图
+contactFormAction = "/contact"
+
+  [params.hero_button]
+    text = "开始阅读"
+    url  = "/post/"
+
+  # 评论设置，选择 Disqus 或 Waline
+  [params.comments]
+  enabled = true
+  disqusShortname = "KenHun"
+
+  # 社交媒体
+  [[params.social]]
+  name = "GitHub"
+  url = "https://github.com/yolialisproxy"
+  icon = "fab fa-github"
+  color = "#6cc644"
+  label = "GitHub"
+
+  [[params.social]]
+  name = "Email"
+  url = "mailto:yoli_alis@2925.com"
+  icon = "fas fa-envelope"
+  label = "Email"
+  profile = false
+
+  [[params.social]]
+  slug = "telegram"
+  label = "Telegram"
+  color = "#0088cc"
+  url = "https://t.me/kenhunshuchong"
+  icon = "fas fa-telegram" # font awesome brand icon name
 
 # 侧边栏配置
 [params.sidebar]
-    enabled = true
-    emoji = "✍️"
-    avatar = "images/avatar.png" # 头像图片路径
-    title = "啃魂"
-    subtitle = "很想写一些让自己满意的小说，一直没做成所愿，顺便看了不少别人的，自己的完本作品有：《龙珠之超级宗师》、《天龙天外天》（又名《书虫成神记》）、《猪妖传》、《悟道天龙》、《幸福武侠》。"
+enabled = true
+emoji = "✍️"
+compact = 'normal'    # 可选值: "false" / "normal" / "compact" / "mini"
+# 其它可选项
+position = "left"   # left / right
+width    = "260px"
 
-[params.author]
-    name = "啃魂"
-    email = "yolialisproxy@gmail.com"
+[parmas.author]
+name = "啃魂"
+avatar = "/images/avatar.jpg" # 替换为你的头像路径
 
-[params.social]
-    name = "GitHub"
-    url = "https://github.com/yolialisproxy"
-    icon = "fab fa-github"
-
+[params.contact]
+email      = "yolialisproxy@gmail.com"
+phone      = "+86 132-0000-0000"
+address    = "XX 市 XX 区 XXX 路 XX 号"
+map_embed  = '<iframe src="https://maps.google.com/..."></iframe>'
+form_action = "mailto:yolialisproxy@gmail.com"  # 可换成其它第三方表单服务
 
 # 菜单配置
 [menu]
@@ -55,57 +109,163 @@ minify = true
     url = "/"
     weight = 1
   [[menu.main]]
+    name = "文章"
+    url = "/post/"
+    weight = 2
+  [[menu.main]]
+    name = "连载"
+    url = "/posts/"
+    weight = 3
+  [[menu.main]]
     name = "分类"
     url = "/categories/"
-    weight = 2
+    weight = 4
   [[menu.main]]
     name = "标签"
     url = "/tags/"
-    weight = 3
+    weight = 5
   [[menu.main]]
     name = "归档"
     url = "/archives/"
-    weight = 4
+    weight = 6
   [[menu.main]]
     identifier = "about"
     name = "关于"
     url = "/about/"
-    weight = 5
+    weight = 7
+  [[menu.main]]
+    identifier = "contact"
+    name = "联系"
+    url = "/contact/"
+    weight = 8
 
-# 网站搜索
-[params.search]
-  enable = true  # 启用搜索功能
-  type = "Lunr"  # 使用 Lunr.js 搜索引擎
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType = "application/json"
+    baseName = "index"
+    isPlainText = true
 
-# 评论设置，选择 Disqus 或 Waline
-[params.comments]
-  enabled = true
-  disqusShortname = "你的disqus用户名"
+  [outputFormats.HTML]
+    mediaType = "text/html"
+    baseName = "index"
+    isPlainText = false
 
 # SEO设置
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
-  section = ["HTML", "RSS"]
-  taxonomy = ["HTML", "RSS"]
-  term = ["HTML", "RSS"]
+home = ["HTML", "CSS", "JSON"]
+section = ["HTML", "RSS"]
+taxonomy = ["HTML", "RSS"]
+term = ["HTML", "RSS"]
 
 # 开启 sitemap
 [sitemap]
-  changefreq = "weekly"
-  priority = 0.5
+changeFreq = ''
+disable = false
+filename = 'sitemap.xml'
+priority = -1
 
 [markup]
-    # Hugo 默认的安全设置屏蔽了 Markdown 里的 HTML 标签。如果你希望保留 HTML，可以在配置里加：
+  defaultMarkdownHandler = 'goldmark'
+  [markup.goldmark]
+    duplicateResourceFiles = false
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      linkifyProtocol = 'https'
+      strikethrough = true
+      table = true
+      taskList = true
+      [markup.goldmark.extensions.cjk]
+        eastAsianLineBreaks = false
+        eastAsianLineBreaksStyle = 'simple'
+        enable = false
+        escapedSpace = false
+      [markup.goldmark.extensions.extras]
+        [markup.goldmark.extensions.extras.delete]
+          enable = false
+        [markup.goldmark.extensions.extras.insert]
+          enable = false
+        [markup.goldmark.extensions.extras.mark]
+          enable = false
+        [markup.goldmark.extensions.extras.subscript]
+          enable = false
+        [markup.goldmark.extensions.extras.superscript]
+          enable = false
+      [markup.goldmark.extensions.passthrough]
+        enable = false
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = []
+          inline = []
+      [markup.goldmark.extensions.typographer]
+        apostrophe = '&rsquo;'
+        disable = false
+        ellipsis = '&hellip;'
+        emDash = '&mdash;'
+        enDash = '&ndash;'
+        leftAngleQuote = '&laquo;'
+        leftDoubleQuote = '&ldquo;'
+        leftSingleQuote = '&lsquo;'
+        rightAngleQuote = '&raquo;'
+        rightDoubleQuote = '&rdquo;'
+        rightSingleQuote = '&rsquo;'
+    [markup.goldmark.parser]
+      autoDefinitionTermID = false
+      autoHeadingID = true
+      autoIDType = 'github'
+      wrapStandAloneImageWithinParagraph = true
+      [markup.goldmark.parser.attribute]
+        block = false
+        title = true
+    [markup.goldmark.renderHooks]
+      [markup.goldmark.renderHooks.image]
+        enableDefault = false
+        useEmbedded = 'auto'
+      [markup.goldmark.renderHooks.link]
+        enableDefault = false
+        useEmbedded = 'auto'
     [markup.goldmark.renderer]
-        unsafe = true
-    [markup.highlight]
-        noClasses = false
-        style = "dracula"     # 代码高亮主题
-        lineNos = true
-    [markup.tableOfContents]
-        startLevel = 2
-        endLevel = 4
+      hardWraps = false
+      unsafe = false
+      xhtml = false
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ''
+    hl_inline = false
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = 'monokai'
+    tabWidth = 4
+    wrapperClass = 'highlight'
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2
+  [markup.asciidocExt]
+    backend = 'html5'
+    extensions = []
+    failureLevel = 'fatal'
+    noHeaderOrFooter = true
+    preserveTOC = false
+    safeMode = 'unsafe'
+    sectionNumbers = false
+    trace = false
+    verbose = false
+    workingFolderCurrent = false
+    [markup.asciidocExt.attributes]
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
 
 [caches]
   [caches.images]
-    dir = ':cacheDir/images'
+  dir = ':cacheDir/images'
+
+[build]
+writeStats = true

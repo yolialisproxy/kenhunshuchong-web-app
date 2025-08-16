@@ -1,0 +1,160 @@
+// ==========================================
+// 主题变量
+// ==========================================
+$purple-light: #cbb9ff;    // 浅紫色
+$purple-dark: rgba(46, 31, 71, 0.85); // 深紫色背景，半透明
+$gray-dark: #1e1e1e;       // 深灰色
+$gray-medium: #6e6e7e;     // 中灰色
+$error-red: #ff6b6b;       // 错误色，柔和红
+$text-color: #d8c7ff;      // 主文字颜色
+$name-color: #b3deff;      // 名称颜色，淡蓝紫
+$keyword-color: #a594f9;   // 关键词色
+$literal-color: #e6db74;   // 字面量黄色
+
+$box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+$box-shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.15);
+$border-radius: 12px;
+$font-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
+$transition: 0.3s ease;
+
+// ==========================================
+// Chroma 代码高亮样式
+// ==========================================
+.chroma {
+  color: $text-color;
+  background-color: $purple-dark;
+  font-family: $font-mono;
+  font-size: 1rem;
+  line-height: 1.6;
+  padding: 1rem;
+  border-radius: $border-radius;
+  overflow-x: auto;
+  box-shadow: $box-shadow-light;
+  transition: all $transition;
+
+  // 半透明高亮行
+  .hl {
+    display: block;
+    width: 100%;
+    background-color: rgba(lighten($purple-dark, 15%), 0.35);
+    border-left: 4px solid $purple-light;
+    padding-left: 0.8rem;
+    margin: 0.1rem 0;
+    border-radius: 4px;
+  }
+
+  // 行号样式
+  .lnt, .ln {
+    display: inline-block;
+    min-width: 2.5rem;
+    padding-right: 0.5rem;
+    text-align: right;
+    color: $gray-medium;
+    user-select: none;
+  }
+
+  .lntd {
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  .lntable {
+    border-spacing: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 100%;
+    display: block;
+
+    > tbody {
+      display: block;
+      width: 100%;
+
+      > tr {
+        display: flex;
+        width: 100%;
+
+        > td:last-child {
+          overflow-x: auto;
+        }
+      }
+    }
+  }
+
+  // 关键词和高亮色
+  .k, .kc, .kd, .kp, .kr, .kt {
+    color: $keyword-color;
+    font-weight: 600;
+  }
+
+  // 命名空间、标签等
+  .kn, .nt {
+    color: $name-color;
+    font-weight: 600;
+  }
+
+  // 名称类、属性
+  .n, .nb, .bp, .nf, .nd, .ne, .na, .nc, .nx {
+    color: lighten($purple-light, 10%);
+  }
+
+  // 字面量、数字、字符串等
+  .l, .m, .mb, .mf, .mh, .mi, .il, .mo, .s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss {
+    color: $literal-color;
+  }
+
+  // 操作符
+  .o, .ow {
+    color: $error-red;
+  }
+
+  // 标点符号
+  .p {
+    color: $text-color;
+  }
+
+  // 注释风格
+  .c, .ch, .cm, .c1, .cs, .cp, .cpf, .gu {
+    color: $gray-dark;
+    font-style: italic;
+  }
+
+  // 加粗与斜体
+  .gs {
+    font-weight: bold;
+  }
+  .ge {
+    font-style: italic;
+  }
+
+  // 错误行
+  .err {
+    color: $error-red;
+    font-weight: bold;
+  }
+
+  // hover 行效果（交互感）
+  tr:hover > td {
+    background-color: rgba($purple-light, 0.08);
+    transition: background-color 0.2s ease;
+  }
+}
+
+// ==========================================
+// 响应式优化
+// ==========================================
+@media (max-width: 1024px) {
+  .chroma {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .chroma {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+}

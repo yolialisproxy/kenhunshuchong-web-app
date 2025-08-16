@@ -1,0 +1,40 @@
+<section class="comments" id="comments">
+  <div class="container container--narrow">
+    <h2 class="comments__title">评论</h2>
+
+    <div class="comments__auth">
+      <div class="auth-actions">
+        <button class="btn btn--outline btn--google" id="login-google">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V9h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+          使用 Google 登录
+        </button>
+        <button class="btn btn--outline" id="login-anon">匿名登录</button>
+        <button class="btn btn--text" id="logout" style="display:none">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+          </svg>
+          退出
+        </button>
+      </div>
+      <div class="auth-status" id="whoami"></div>
+    </div>
+
+    <div class="comments__new">
+      <textarea
+        class="form-input"
+        id="comment-input"
+        rows="4"
+        placeholder="写下你的看法…"
+        maxlength="1000"
+      ></textarea>
+      <div class="comments__toolbar">
+        <small class="char-count" id="char-count">0 / 1000</small>
+        <button class="btn btn--primary" id="submit-comment">发布评论</button>
+      </div>
+    </div>
+
+    <div class="comments__list" id="comment-list"></div>
+  </div>
+</section>

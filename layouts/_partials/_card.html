@@ -1,0 +1,33 @@
+{{/* =================================================================
+    layouts/partials/_card.html
+    - 全站统一、可复用的文章卡片组件
+    - 优雅处理有无封面图的情况
+    - 支持配置默认占位图
+    - 整卡可点，符合最佳实践
+================================================================= */}}
+
+{{ $placeholder := .Site.Params.placeholderImage | default "" }}
+{{ $cover := .Params.cover | default .Params.image }}
+
+<a href="{{ .RelPermalink }}" class="card-link-wrapper">
+    <article class="post-card">
+        {{ if $cover }}
+        <div class="card-cover">
+            <img src="{{ $cover | absURL }}" alt="{{ .Title }}" class="card-thumb" loading="lazy">
+        </div>
+        {{ else if $placeholder }}
+        <div class="card-cover card-cover--placeholder">
+             <img src="{{ $placeholder | absURL }}" alt="" class="card-thumb" loading="lazy">
+        </div>
+        {{ end }}
+
+        <div class="card-content">
+            <h2 class="card-title">{{ .Title }}</h2>
+            <p class="card-summary">{{ .Summary | truncate 100 }}</p>
+            <div class="card-meta">
+                <time class="card-date">{{ .Date.Format "2006年01月02日" }}</time>
+                <span class="card-reading-time">· {{ .ReadingTime }} 分钟</span>
+            </div>
+        </div>
+    </article>
+</a>

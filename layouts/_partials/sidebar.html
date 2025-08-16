@@ -1,0 +1,60 @@
+<aside class="sidebar">
+    <!-- 作者信息 -->
+    {{ with .Site.GetPage "简介" }}
+    <div class="widget author-widget">
+        <div class="author-avatar author-info">
+            {{ .Content | safeHTML }}  <!-- 引用 About 页面正文 -->
+        </div>
+
+        <!-- 作者社交链接 -->
+        <div class="author-social">
+        {{ range .Site.Params.social }}
+            <a href="{{ .url }}" class="social-link" target="_blank" title="{{ .name }}">
+            <i class="{{ .icon }}"></i>
+            </a>
+        {{ end }}
+        </div>
+    </div>
+    {{ end }}
+
+
+    <!-- 最新文章 -->
+    <div class="widget recent-posts-widget">
+        <h3 class="widget-title">最新文章</h3>
+        <ul class="recent-posts-list">
+            {{ range first 5 site.RegularPages }}
+                <li class="recent-post-item">
+                    <a href="{{ .RelPermalink }}" class="recent-post-title">{{ .Title }}</a>
+                    <time class="recent-post-date">{{ .Date.Format "01-02" }}</time>
+                </li>
+            {{ end }}
+        </ul>
+    </div>
+
+    <!-- 热门标签 -->
+    <div class="widget tags-widget">
+        <h3 class="widget-title">热门标签</h3>
+        <div class="widget-tags">
+            {{ range first 15 site.Taxonomies.tags.ByCount }}
+                <a href="{{ .Page.RelPermalink }}" class="widget-tag">
+                    {{ .Page.Title }}
+                    <span class="tag-count">{{ .Count }}</span>
+                </a>
+            {{ end }}
+        </div>
+    </div>
+
+    <!-- 归档链接 -->
+    <div class="widget archive-widget">
+        <h3 class="widget-title">文章归档</h3>
+        <ul class="archive-list">
+            {{ range site.RegularPages.GroupByDate "2006-01" }}
+                <li class="archive-item">
+                    <a href="{{ "archive" | relURL }}#{{ .Key }}">
+                        {{ .Key }} ({{ len .Pages }})
+                    </a>
+                </li>
+            {{ end }}
+        </ul>
+    </div>
+</aside>

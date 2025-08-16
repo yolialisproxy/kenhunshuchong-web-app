@@ -1,0 +1,167 @@
+/* ============================================================
+   紫韵书卷风 · 代码高亮 SCSS 完整版（优化版）
+   主题色调：浅紫主色 + 深紫半透明背景 + 深灰点缀
+   ============================================================ */
+
+/* === 色彩变量 === */
+$syntax-bg: rgba(45, 33, 65, 0.95);       // 深紫半透明背景
+$syntax-bg-dark: rgba(28, 22, 40, 0.9);   // 更深紫（行号/阴影）
+$syntax-bg-gray: rgba(26, 26, 26, 0.9);   // 深灰备用
+$syntax-fg: #e6d9f5;                      // 主文字浅紫白
+$syntax-accent: #c39be3;                  // 浅紫强调
+$syntax-accent-2: #b584d6;                // 中紫强调
+$syntax-keyword: #d7b2ff;                 // 关键字
+$syntax-string: #c4ffdd;                  // 字符串淡绿
+$syntax-number: #ffcf99;                  // 数字暖色
+$syntax-func: #ffe2a9;                    // 函数
+$syntax-class: #fbc3ff;                   // 类名
+$syntax-comment: #a692b9;                 // 注释灰紫
+$syntax-error: #ff5f87;                    // 错误粉红
+
+/* === 字体设置 === */
+$font-mono: 'Fira Code', 'Source Code Pro', monospace;
+$font-serif: "STKaiti", "KaiTi", "FangSong", serif;
+
+pre, code {
+  font-family: $font-mono;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === 代码块容器 === */
+pre {
+  background: $syntax-bg;
+  color: $syntax-fg;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.5);
+  }
+}
+
+code {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+}
+
+/* === 行号样式 === */
+.chroma .ln,
+.hljs-ln-numbers {
+  color: $syntax-comment;
+  background: $syntax-bg-dark;
+  padding: 0 0.6rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  user-select: none;
+  text-align: right;
+}
+
+/* === 高亮颜色映射 === */
+.chroma .k, .hljs-keyword { color: $syntax-keyword; font-weight: bold; }
+.chroma .nc, .hljs-class, .hljs-title.class_ { color: $syntax-class; font-weight: bold; }
+.chroma .nf, .hljs-function, .hljs-title.function_ { color: $syntax-func; }
+.chroma .s, .hljs-string { color: $syntax-string; }
+.chroma .m, .chroma .mi, .chroma .mf, .hljs-number { color: $syntax-number; }
+.chroma .c, .hljs-comment { color: $syntax-comment; font-style: italic; }
+.chroma .o, .hljs-operator, .hljs-punctuation { color: $syntax-accent-2; }
+.chroma .err, .hljs-error { color: $syntax-error; background: $syntax-bg-gray; font-weight: bold; }
+.chroma .nt, .hljs-tag { color: $syntax-accent; font-weight: bold; }
+.chroma .na, .hljs-attr { color: $syntax-keyword; }
+.chroma .s2, .hljs-string { color: $syntax-string; }
+
+/* === 内联代码 === */
+p code, li code {
+  background: rgba(255, 255, 255, 0.08);
+  color: $syntax-accent;
+  padding: 0.15rem 0.3rem;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+}
+
+/* === 选中效果 === */
+pre code::selection {
+  background: rgba(195, 155, 227, 0.35);
+}
+
+/* === 外层容器（标题栏 + 装饰） === */
+.chroma {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: $syntax-bg;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  margin: 1.5rem 0;
+  transition: transform 0.2s;
+
+  &:hover { transform: translateY(-2px); }
+}
+
+/* 标题栏 */
+.chroma::before {
+  content: attr(data-lang);
+  display: block;
+  background: linear-gradient(to right, $syntax-bg-dark, $syntax-accent-2);
+  color: $syntax-fg;
+  font-family: $font-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 0.45rem 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* 花边装饰 */
+.chroma::after {
+  content: "";
+  position: absolute;
+  top: 0.4rem;
+  right: 0.6rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='%23c39be3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 Q60 30 100 50 Q60 70 50 100 Q40 70 0 50 Q40 30 50 0 Z'/%3E%3C/svg%3E");
+  background-size: cover;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+/* 内部代码滚动 */
+.chroma code,
+.chroma pre {
+  background: transparent;
+  margin: 0;
+  padding: 1rem;
+}
+
+/* 滚动条美化 */
+.chroma pre::-webkit-scrollbar {
+  height: 6px;
+}
+.chroma pre::-webkit-scrollbar-thumb {
+  background: $syntax-accent-2;
+  border-radius: 3px;
+}
+.chroma pre::-webkit-scrollbar-thumb:hover {
+  background: lighten($syntax-accent-2, 10%);
+}
+.chroma pre::-webkit-scrollbar-track {
+  background: $syntax-bg-dark;
+}
+
+/* === 响应式优化 === */
+@media (max-width: 768px) {
+  pre, .chroma pre {
+    font-size: 0.88rem;
+    padding: 0.8rem;
+  }
+  .chroma::before {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.6rem;
+  }
+}

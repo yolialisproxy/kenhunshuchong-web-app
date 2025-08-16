@@ -1,0 +1,110 @@
+<header class="site-header">
+    <div class="header-container">
+    <!--
+        <div class="site-branding">
+            <a href="{{ "/" | relURL }}" class="site-title">{{ site.Title }}</a>
+        </div>
+    -->
+
+        <nav class="main-navigation navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse nav-collapse">
+                <ul class="nav nav-item">
+                    <li class="nav-item active"><a class="nav-link" href="{{ "/" | relURL }}">首页</a></li>
+                    <li class="nav-item has-dropdown">
+                        <a href="{{ "post" | relURL }}" class="nav-link" aria-haspopup="true" aria-expanded="false">文章</a>
+                        <div class="dropdown" role="menu">
+                        <a class="dropdown-item" href="{{ "post" | relURL }}">短篇</a>
+                        <a class="dropdown-item" href="{{ "posts" | relURL }}">连载</a>
+                        <a class="dropdown-item" href="{{ "categories" | relURL }}">分类</a>
+                        <a class="dropdown-item" href="{{ "tags" | relURL }}">标签</a>
+                        <a class="dropdown-item" href="{{ "archive" | relURL }}">归档</a>
+                        </div>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="{{ "themes" | relURL }}" class="nav-link" aria-haspopup="true" aria-expanded="false">主题</a>
+                          <div class="dropdown" role="menu">
+                          <a class="dropdown-item" href="{{ "themes" | relURL }}">介绍</a>
+                          <a class="dropdown-item" href="{{ "downloads" | relURL }}">下载</a>
+                          </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ "about" | relURL }}">关于</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ "/contact" | relURL }}">联系</a></li>
+                </ul>
+            </div>
+        </nav>
+        <script src="{{ "js/search.js" | relURL }}"></script>
+        <ul class=search-form><div class=search-form>{{ partialCached "search.html" . }} </div></ul>
+    </div>
+</header>
+
+<script>
+// 下拉菜单交互逻辑（追加到现有 JS）
+document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
+  const link = item.querySelector('.nav-link');
+  const dropdown = item.querySelector('.dropdown');
+
+  // 移动端点击切换下拉
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    link.addEventListener('click', (e) => {
+      if (window.getComputedStyle(dropdown).display === 'none') {
+        e.preventDefault();
+        item.classList.toggle('is-open');
+      }
+    });
+  }
+
+  // 键盘导航支持
+  link.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const items = dropdown.querySelectorAll('.dropdown-item');
+      const firstItem = items[0];
+      const lastItem = items[items.length - 1];
+
+      if (e.key === 'ArrowDown') {
+        firstItem.focus();
+      } else if (e.key === 'ArrowUp') {
+        lastItem.focus();
+      }
+    }
+  });
+
+  // 下拉菜单项键盘导航
+  const dropdownItems = dropdown.querySelectorAll('.dropdown-item');
+  dropdownItems.forEach((dropdownItem, index) => {
+    dropdownItem.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (index === 0) {
+          link.focus();
+        } else {
+          dropdownItems[index - 1].focus();
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (index === dropdownItems.length - 1) {
+          link.focus();
+        } else {
+          dropdownItems[index + 1].focus();
+        }
+      } else if (e.key === 'Escape') {
+        link.focus();
+      }
+    });
+  });
+});
+
+// 移动端点击下拉菜单项后关闭下拉
+document.querySelectorAll('.dropdown-item').forEach(item => {
+  item.addEventListener('click', () => {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      const dropdown = item.closest('.dropdown');
+      const navItem = item.closest('.nav-item');
+      if (dropdown && navItem) {
+        navItem.classList.remove('is-open');
+      }
+    }
+  });
+});
+</script>
+

@@ -1,0 +1,182 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>今天第一次使用hugo构建自己的博客 - 啃魂的寒舍</title><meta name=description content="欢迎光临啃魂的个人博客，他的完本作品有：《龙珠之超级宗师》、《天龙天外天》（又名《书虫成神记》）、《猪妖传》、《悟道天龙》、《幸福武侠》。他已经研究写作很长时间了，相信很快就会有新作品出来。"><meta name=keywords content="啃魂,龙珠之超级宗师,天龙天外天,书虫成神记,猪妖传,悟道天龙,幸福武侠"><meta name=author content><meta property="og:type" content="website"><meta property="og:title" content="今天第一次使用hugo构建自己的博客"><meta property="og:description" content="欢迎光临啃魂的个人博客，他的完本作品有：《龙珠之超级宗师》、《天龙天外天》（又名《书虫成神记》）、《猪妖传》、《悟道天龙》、《幸福武侠》。他已经研究写作很长时间了，相信很快就会有新作品出来。"><meta property="og:url" content="/post/my-first-post-%E5%89%AF%E6%9C%AC-28/"><meta property="og:site_name" content="啃魂的寒舍"><meta name=twitter:card content="summary_large_image"><link rel=canonical href=/post/my-first-post-%E5%89%AF%E6%9C%AC-28/><link rel=alternate type=application/rss+xml href=/index.xml title=啃魂的寒舍><link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/scss/style.min.6c6d9343cf04c23912b250a6104d4e303b07c33eac875e9fd0b1593b909b43b9.css integrity="sha256-bG2TQ88EwjkSslCmEE1OMDsHwz6sh16f0LFZO5CbQ7k=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css><link rel=preload as=image href=/images/hero><link rel=icon type=image/x-icon href=/favicon.ico><script type=importmap>
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js",
+      "firebase/database": "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"
+    }
+  }
+  </script></head><body><header class=site-header><div class=header-container><nav class="main-navigation navbar navbar-expand-lg navbar-light bg-light"><div class="collapse nav-collapse"><ul class="nav nav-item"><li class="nav-item active"><a class=nav-link href=/>首页</a></li><li class="nav-item has-dropdown"><a href=/post class=nav-link aria-haspopup=true aria-expanded=false>文章</a><div class=dropdown role=menu><a class=dropdown-item href=/post>短篇</a>
+<a class=dropdown-item href=/posts>连载</a>
+<a class=dropdown-item href=/categories>分类</a>
+<a class=dropdown-item href=/tags>标签</a>
+<a class=dropdown-item href=/archive>归档</a></div></li><li class="nav-item has-dropdown"><a href=/themes class=nav-link aria-haspopup=true aria-expanded=false>主题</a><div class=dropdown role=menu><a class=dropdown-item href=/themes>介绍</a>
+<a class=dropdown-item href=/downloads>下载</a></div></li><li class=nav-item><a class=nav-link href=/about>关于</a></li><li class=nav-item><a class=nav-link href=/contact>联系</a></li></ul></div></nav><script src=/js/search.js></script><ul class=search-form><div class=search-form><div id=search class=search-container><input type=text id=search-input onkeyup=search(this.value) placeholder=搜索文章...></div><script>var indexJsonUrl="/index.json"</script></div></ul></div></header><script>document.querySelectorAll(".nav-item.has-dropdown").forEach(e=>{const t=e.querySelector(".nav-link"),s=e.querySelector(".dropdown");window.matchMedia("(max-width: 768px)").matches&&t.addEventListener("click",t=>{window.getComputedStyle(s).display==="none"&&(t.preventDefault(),e.classList.toggle("is-open"))}),t.addEventListener("keydown",e=>{if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();const t=s.querySelectorAll(".dropdown-item"),n=t[0],o=t[t.length-1];e.key==="ArrowDown"?n.focus():e.key==="ArrowUp"&&o.focus()}});const n=s.querySelectorAll(".dropdown-item");n.forEach((e,s)=>{e.addEventListener("keydown",e=>{e.key==="ArrowUp"?(e.preventDefault(),s===0?t.focus():n[s-1].focus()):e.key==="ArrowDown"?(e.preventDefault(),s===n.length-1?t.focus():n[s+1].focus()):e.key==="Escape"&&t.focus()})})}),document.querySelectorAll(".dropdown-item").forEach(e=>{e.addEventListener("click",()=>{if(window.matchMedia("(max-width: 768px)").matches){const n=e.closest(".dropdown"),t=e.closest(".nav-item");n&&t&&t.classList.remove("is-open")}})})</script><div class=container><div class=row><div class=col-md-8><main id=main><div id=search-results class=search-results></div><article class=post-single><header class=post-header><h1 class=post-title>今天第一次使用hugo构建自己的博客</h1><div class=post-meta><span class=reading-time>阅读时间：7 分钟</span>
+<span class=word-count>字数：3059</span></div><div class=post-terms><div class=post-tags><span class=term-title>标签：</span>
+<a href=/tags/hugo/ class=tag-link>#Hugo</a></div></div></header><div class=post-content><p>如果不是为了实验谷歌的firebase，我或许不会这么快使用hugo，这东西虽然不难，但还是费了我好长时间，好在终于弄成了。</p><p>说是弄成了，可是这网站现在除了这个帖子，几乎什么内容都没有，实在太干净了！</p><p>不过我很喜欢hugo这个隐藏的功能，就是md格式的文档可以直接拿来用——当作网页用。</p><p>比较搞笑的是，很快我发现，连个回贴的功能都没有，只好继续编辑我的md文件，这样继续增加新内容。</p><p>试验了一下，更新很方便，速度反应并不慢，特别是托管到firebase的自带域名服务，不得不给一个良心赞，果然是唯快不破。</p><blockquote><p>Hugo 在构建你的站点之前不会清除 <code>public</code> 目录。现有文件会被覆盖，但不会被删除。此行为旨在防止你在构建后无意中删除你可能添加到 <code>public</code> 目录中的文件。</p><p>根据您的需要，您可能希望在每次构建之前手动清除 <code>public</code> 目录的内容。</p><h2 id=draft-future-and-expired-content-草稿未来和过期内容>Draft, future, and expired content 草稿、未来和过期内容</h2><p><img src=/images/hero loading=lazy></p><p>Hugo 允许你在内容的 <a class=link href=https://gohugo.io/content-management/front-matter/ target=_blank rel=noopener>front matter</a> 中设置 <code>draft</code> 、 <code>date</code> 、 <code>publishDate</code> 和 <code>expiryDate</code> 。默认情况下，Hugo 在以下情况下不会发布内容：</p><ul><li><code>draft</code> 值为 <code>true</code></li><li>该 <code>date</code> 是未来的日期</li><li><code>publishDate</code> 是未来的日期</li><li><code>expiryDate</code> 已过去</li></ul><p>Hugo 会发布草稿、未来和过期<a class=link href=https://gohugo.io/quick-reference/glossary/#node target=_blank rel=noopener>节点</a>页面的后代页面。为了防止这些后代页面被发布，请使用 <a class=link href=https://gohugo.io/content-management/front-matter/#cascade target=_blank rel=noopener><code>cascade</code></a> 内容的级联字段将<a class=link href=https://gohugo.io/content-management/build-options/ target=_blank rel=noopener>构建选项</a>级联到后代页面。</p><p>您可以使用命令行标志运行 <code>hugo</code> 或 <code>hugo server</code> 时覆盖默认行为：</p><div class=chroma data-lang=sh><pre tabindex=0>
+    <code class=language-sh>hugo --buildDrafts    # or -D
+hugo --buildExpired   # or -E
+hugo --buildFuture    # or -F</code>
+  </pre></div><p>虽然您也可以在站点配置中设置这些值，但除非所有内容作者都知道并理解这些设置，否则可能会导致不良结果。</p><p>如上所述，Hugo 在构建你的网站之前不会清除 <code>public</code> 目录。根据<em>当前</em>对上述四个条件的评估，构建完成后，你的 <code>public</code> 目录可能会包含上次构建过程中产生的无关文件。</p><p>一种常见的做法是在每次构建之前手动清除 <code>public</code> 目录的内容，以删除草稿、过期和未来的内容。</p><h2 id=develop-and-test-your-site-开发并测试您的网站>Develop and test your site 开发并测试您的网站</h2><p>要在开发布局或创建内容时查看您的网站， <code>cd</code> 进入您的项目目录并运行：</p><div class=chroma data-lang=sh><pre tabindex=0>
+    <code class=language-sh>hugo server</code>
+  </pre></div><p><a class=link href=https://gohugo.io/commands/hugo_server/ target=_blank rel=noopener><code>hugo server</code></a> 命令会构建你的网站，并使用一个精简的 HTTP 服务器来提供你的页面。运行 <code>hugo server</code> 时，它会显示你本地网站的 URL：</p><div class=chroma data-lang=text><pre tabindex=0>
+    <code class=language-text>Web Server is available at http://localhost:1313/</code>
+  </pre></div><p>服务器运行时，会监视项目目录中的资源、配置、内容、数据、布局、翻译和静态文件的更改。当检测到更改时，服务器会重建您的网站并使用 <a class=link href=https://github.com/livereload/livereload-js target=_blank rel=noopener>LiveReload</a> 刷新浏览器。</p><p>大多数 Hugo 构建速度都非常快，除非您直接查看浏览器，否则您可能不会注意到变化。</p><p>服务器运行时，Hugo 会将 JavaScript 注入到生成的 HTML 页面中。LiveReload 脚本会通过 Web 套接字建立从浏览器到服务器的连接。您无需安装任何软件或浏览器插件，也无需任何配置。</p><p>编辑内容时，如果希望浏览器自动重定向到上次修改的页面，请运行：</p><div class=chroma data-lang=sh><pre tabindex=0>
+    <code class=language-sh>hugo server --navigateToChanged</code>
+  </pre></div><h2 id=deploy-your-site-部署您的网站>Deploy your site 部署您的网站</h2><p><img src=/images/hero4 loading=lazy></p><p>如上所述，Hugo 在构建网站之前不会清除 <code>public</code> 目录。请在每次构建之前手动清除 <code>public</code> 目录的内容，以删除草稿、过期和未来发布的内容。</p><p>当您准备好部署站点时，请运行：</p><div class=chroma data-lang=sh><pre tabindex=0>
+    <code class=language-sh>hugo</code>
+  </pre></div><p>这将构建你的网站，并将文件发布到 <code>public</code> 目录。目录结构如下所示：</p><div class=chroma data-lang=text><pre tabindex=0>
+    <code class=language-text>public/
+├── categories/
+│   ├── index.html
+│   └── index.xml  <-- RSS feed for this section
+├── posts/
+│   ├── my-first-post/
+│   │   └── index.html
+│   ├── index.html
+│   └── index.xml  <-- RSS feed for this section
+├── tags/
+│   ├── index.html
+│   └── index.xml  <-- RSS feed for this section
+├── index.html
+├── index.xml      <-- RSS feed for the site
+└── sitemap.xml</code>
+  </pre></div><p>在简单的托管环境中，您通常通过 <code>ftp</code> 、 <code>rsync</code> 或 <code>scp</code> 文件传输到虚拟主机的根目录， <code>public</code> 目录的内容就是您所需要的。</p><p>我们的大多数用户使用 <a class=link href=https://gohugo.io/quick-reference/glossary/#cicd target=_blank rel=noopener>CI/CD</a> 工作流程部署他们的网站，其中将 <a class=link href=https://gohugo.io/getting-started/usage/#fn:1 target=_blank rel=noopener>1</a> 推送到他们的 GitHub 或 GitLab 存储库会触发构建和部署。流行的提供商包括 <a class=link href=https://aws.amazon.com/amplify/ target=_blank rel=noopener>AWS Amplify</a> 、 <a class=link href=https://cloudcannon.com/ target=_blank rel=noopener>CloudCannon</a> 、 <a class=link href=https://pages.cloudflare.com/ target=_blank rel=noopener>Cloudflare Pages</a> 、 <a class=link href=https://pages.github.com/ target=_blank rel=noopener>GitHub Pages</a> 、 <a class=link href=https://docs.gitlab.com/ee/user/project/pages/ target=_blank rel=noopener>GitLab Pages</a> 和 <a class=link href=https://www.netlify.com/ target=_blank rel=noopener>Netlify</a> 。</p><p>在<a class=link href=https://gohugo.io/host-and-deploy/ target=_blank rel=noopener>主机和部署</a>部分了解更多信息。</p><hr><ol><li>Git 仓库包含整个项目目录，通常不包括 <code>public</code> 目录，因为站点是在推送<em>之后</em>构建的 <a class=link href=https://gohugo.io/getting-started/usage/#fnref:1 target=_blank rel=noopener>。↩︎</a></li></ol><h1 id=目录结构>目录结构</h1><p>Hugo 目录结构概述。</p><p>每个 Hugo 项目都是一个目录，其中包含有助于您网站的内容、结构、行为和呈现的子目录。</p><h2 id=站点骨架>站点骨架</h2><p>当你创建新站点时，Hugo 会生成一个项目框架。例如，以下命令：</p><div class=chroma data-lang=sh><pre tabindex=0>
+    <code class=language-sh>hugo new site my-site</code>
+  </pre></div><p>创建此目录结构：</p><div class=chroma data-lang=txt><pre tabindex=0>
+    <code class=language-txt>my-site/
+├── archetypes/
+│   └── default.md
+├── assets/
+├── content/
+├── data/
+├── i18n/
+├── layouts/
+├── static/
+├── themes/
+└── hugo.toml         <-- site configuration</code>
+  </pre></div><p>根据需求，您可能希望将站点配置组织到子目录中：</p><div class=chroma data-lang=txt><pre tabindex=0>
+    <code class=language-txt>my-site/
+├── archetypes/
+│   └── default.md
+├── assets/
+├── config/           <-- site configuration
+│   └── _default/
+│       └── hugo.toml
+├── content/
+├── data/
+├── i18n/
+├── layouts/
+├── static/
+└── themes/</code>
+  </pre></div><p>当你建立你的网站时，Hugo 会创建一个 <code>public</code> 目录，通常还会创建一个 <code>resources</code> 目录：</p><div class=chroma data-lang=txt><pre tabindex=0>
+    <code class=language-txt>my-site/
+├── archetypes/
+│   └── default.md
+├── assets/
+├── config/       
+│   └── _default/
+│       └── hugo.toml
+├── content/
+├── data/
+├── i18n/
+├── layouts/
+├── public/       <-- created when you build your site
+├── resources/    <-- created when you build your site
+├── static/
+└── themes/</code>
+  </pre></div><h2 id=目录>目录</h2><p>每个子目录都会对您网站的内容、结构、行为或呈现做出贡献。</p><ul><li><p>archetypes 原型</p><p><code>archetypes</code> 目录包含新内容的模板。查看<a class=link href=https://gohugo.io/content-management/archetypes/ target=_blank rel=noopener>详情 </a>。</p></li><li><p>assets 资产</p><p><code>assets</code> 目录包含通常通过资源管道传递的全局资源。这些资源包括图像、CSS、Sass、JavaScript 和 TypeScript。查看<a class=link href=https://gohugo.io/hugo-pipes/introduction/ target=_blank rel=noopener>详情 </a>。</p></li><li><p>config 配置</p><p><code>config</code> 目录包含你的站点配置，可能被拆分成多个子目录和文件。对于配置极少的项目，或者不需要在不同环境中表现不同的项目，在项目根目录中放置一个名为 <code>hugo.toml</code> 的配置文件就足够了。查看<a class=link href=https://gohugo.io/configuration/introduction/#configuration-directory target=_blank rel=noopener>详情 </a>。</p></li><li><p>content 内容</p><p><code>content</code> 目录包含构成您网站内容的标记文件（通常为 Markdown）和页面资源。查看<a class=link href=https://gohugo.io/content-management/organization/ target=_blank rel=noopener>详情 </a>。</p></li><li><p>data 数据</p><p><code>data</code> 目录包含用于扩充内容、配置、本地化和导航的数据文件（JSON、TOML、YAML 或 XML）。查看<a class=link href=https://gohugo.io/content-management/data-sources/ target=_blank rel=noopener>详情 </a>。</p></li><li><p>i18n 国际化</p><p><code>i18n</code> 目录包含多语言网站的翻译表。查看<a class=link href=https://gohugo.io/content-management/multilingual/ target=_blank rel=noopener>详情 </a>。</p></li><li><p>layouts 布局</p><p><code>layouts</code> 目录包含用于将内容、数据和资源转换为完整网站的模板。查看<a class=link href=https://gohugo.io/templates/ target=_blank rel=noopener>详情 </a>。</p></li><li><p>public</p><p><code>public</code> 目录包含已发布的网站，它是在运行 <code>hugo</code> 或 <code>hugo server</code> 命令时生成的。Hugo 会根据需要重新创建此目录及其内容。查看<a class=link href=https://gohugo.io/getting-started/usage/#build-your-site target=_blank rel=noopener>详情 </a>。</p></li><li><p>resources 资源</p><p><code>resources</code> 目录包含 Hugo 资源管道的缓存输出，这些输出是在运行 <code>hugo</code> 或 <code>hugo server</code> 命令时生成的。默认情况下，此缓存目录包含 CSS 和图片。Hugo 会根据需要重新创建此目录及其内容。</p></li><li><p>static 静止的</p><p><code>static</code> 目录包含您在构建网站时将被复制到 <code>public</code> 目录的文件。例如： <code>favicon.ico</code> 、 <code>robots.txt</code> 以及用于验证网站所有权的文件。在引入<a class=link href=https://gohugo.io/quick-reference/glossary/#page-bundle target=_blank rel=noopener>页面包</a>和<a class=link href=https://gohugo.io/hugo-pipes/introduction/ target=_blank rel=noopener>资源管道</a>之前， <code>static</code> 目录也用于存放图片、CSS 和 JavaScript。</p></li><li><p>themes 主题</p><p><code>themes</code>目录包含一个或多个<a class=link href=https://gohugo.io/quick-reference/glossary/#theme target=_blank rel=noopener>主题 </a>，每个主题都有自己的子目录。</p></li></ul><h2 id=联合文件系统>联合文件系统</h2><p>Hugo 创建了一个联合文件系统，允许你将两个或多个目录挂载到同一位置。例如，假设你的主目录在一个目录中包含 Hugo 项目，在另一个目录中包含共享内容：</p><div class=chroma data-lang=text><pre tabindex=0>
+    <code class=language-text>home/
+└── user/
+    ├── my-site/            
+    │   ├── content/
+    │   │   ├── books/
+    │   │   │   ├── _index.md
+    │   │   │   ├── book-1.md
+    │   │   │   └── book-2.md
+    │   │   └── _index.md
+    │   ├── themes/
+    │   │   └── my-theme/
+    │   └── hugo.toml
+    └── shared-content/     
+        └── films/
+            ├── _index.md
+            ├── film-1.md
+            └── film-2.md</code>
+  </pre></div><p>您可以在使用挂载点构建站点时包含共享内容。在您的站点配置中：</p><p>json</p><div class=chroma data-lang=json><pre tabindex=0>
+    <code class=language-json>{
+   "module": {
+      "mounts": [
+         {
+            "source": "content",
+            "target": "content"
+         },
+         {
+            "source": "/home/user/shared-content",
+            "target": "content"
+         }
+      ]
+   }
+}</code>
+  </pre></div><p>当您将一个目录覆盖在另一个目录之上时，必须挂载这两个目录。</p><p>Hugo 不支持符号链接。如果您需要符号链接提供的功能，请使用 Hugo 的联合文件系统。</p><p>挂载后，联合文件系统具有以下结构：</p><div class=chroma data-lang=text><pre tabindex=0>
+    <code class=language-text>home/
+└── user/
+    └── my-site/
+        ├── content/
+        │   ├── books/
+        │   │   ├── _index.md
+        │   │   ├── book-1.md
+        │   │   └── book-2.md
+        │   ├── films/
+        │   │   ├── _index.md
+        │   │   ├── film-1.md
+        │   │   └── film-2.md
+        │   └── _index.md
+        ├── themes/
+        │   └── my-theme/
+        └── hugo.toml</code>
+  </pre></div><p>当两个或多个文件具有相同路径时，优先顺序遵循挂载顺序。例如，如果共享内容目录包含 <code>books/book-1.md</code> ，它将被忽略，因为项目的 <code>content</code> 目录首先被挂载。</p><p>您可以将目录挂载到 <code>archetypes</code> 、 <code>assets</code> 、 <code>content</code> 、 <code>data</code> 、 <code>i18n</code> 、 <code>layouts</code> 和 <code>static</code> 。查看<a class=link href=https://gohugo.io/configuration/module/#mounts target=_blank rel=noopener>详情 </a>。</p><p>您还可以使用 Hugo 模块从 Git 仓库挂载目录。查看<a class=link href=https://gohugo.io/hugo-modules/ target=_blank rel=noopener>详情 </a>。</p><h2 id=主题骨架>主题骨架</h2><p>当你创建新主题时，Hugo 会生成一个功能性主题框架。例如，以下命令：</p><div class=chroma data-lang=text><pre tabindex=0>
+    <code class=language-text>hugo new theme my-theme</code>
+  </pre></div><p>创建此目录结构（未显示子目录）：</p><div class=chroma data-lang=text><pre tabindex=0>
+    <code class=language-text>my-theme/
+├── archetypes/
+├── assets/
+├── content/
+├── data/
+├── i18n/
+├── layouts/
+├── static/
+├── LICENSE
+├── README.md
+├── hugo.toml
+└── theme.toml</code>
+  </pre></div><p>使用上面描述的联合文件系统，Hugo 将每个目录挂载到项目中的相应位置。当两个文件具有相同的路径时，项目目录中的文件优先。</p><p>例如，您可以通过将副本放置在项目目录内的同一位置来覆盖主题的模板。</p><p>如果您同时使用来自两个或多个主题或模块的组件，并且发生路径冲突，则第一个安装优先。</p></blockquote></div><div class=disqus-container><div class=comments-section id=comments><h3 class=comments-title>发表评论</h3><p class=comments-description>您的观点对我们很重要！支持匿名评论。</p><form class=comment-form id=comment-form><input type=hidden name=page_id value=/post/my-first-post-%E5%89%AF%E6%9C%AC-28/>
+<input type=hidden name=page_title value=今天第一次使用hugo构建自己的博客><div class=form-group><label for=comment-name>姓名 (可选):</label>
+<input type=text id=comment-name name=name placeholder=匿名用户 class=form-input></div><div class=form-group><label for=comment-email>邮箱 (可选):</label>
+<input type=email id=comment-email name=email placeholder=不会公开 class=form-input></div><div class=form-group><label for=comment-content>评论内容 (<span class=required-star>*</span>):</label>
+<textarea id=comment-content name=content rows=6 required class=form-input placeholder=请在这里输入您的评论...></textarea></div><button type=submit class="btn btn--primary">提交评论</button><div id=comment-message class=comment-message></div></form><h3 class=comments-list-title>所有评论</h3><div class=comments-list id=comments-list><p>加载评论中...</p></div></div></div><nav class=post-nav><div class=post-nav-prev><a href=/post/my-first-post-%E5%89%AF%E6%9C%AC-29/ rel=prev><span class=post-nav-label>← 上一篇</span>
+<span class=post-nav-title>今天第一次使用hugo构建自己的博客</span></a></div><div class=post-nav-next><a href=/post/my-first-post-%E5%89%AF%E6%9C%AC-27/ rel=next><span class=post-nav-label>下一篇 →</span>
+<span class=post-nav-title>今天第一次使用hugo构建自己的博客</span></a></div></nav></article><section class=related-posts><h3>相关文章</h3><div class=related-posts-grid><article class=related-post><h4><a href=/post/my-first-post-%E5%89%AF%E6%9C%AC-13/>今天第一次使用hugo构建自己的博客</a></h4><time>0001-01-01</time><p><p>如果不是为了实验谷歌的firebase，我或许不会这么快使用hugo，这东西虽然不难，但还是费了我好长时间，好在终于弄成了。</p><p>说是弄成了，可是这网站现在除了这个帖子，几乎什么内容都没有，实在太干净了！</p></p></article><article class=related-post><h4><a href=/post/my-first-post-%E5%89%AF%E6%9C%AC-3/>今天第一次使用hugo构建自己的博客</a></h4><time>0001-01-01</time><p><p>如果不是为了实验谷歌的firebase，我或许不会这么快使用hugo，这东西虽然不难，但还是费了我好长时间，好在终于弄成了。</p><p>说是弄成了，可是这网站现在除了这个帖子，几乎什么内容都没有，实在太干净了！</p></p></article><article class=related-post><h4><a href=/post/my-first-post-%E5%89%AF%E6%9C%AC-14/>今天第一次使用hugo构建自己的博客</a></h4><time>0001-01-01</time><p><p>如果不是为了实验谷歌的firebase，我或许不会这么快使用hugo，这东西虽然不难，但还是费了我好长时间，好在终于弄成了。</p><p>说是弄成了，可是这网站现在除了这个帖子，几乎什么内容都没有，实在太干净了！</p></p></article></div></section></main></div><div class=col-md-4><aside class=sidebar><div class="widget author-widget"><div class="author-avatar author-info"><table><thead><tr><th style=text-align:left><img src=/images/avatar.jpg loading=lazy></th><th style=text-align:center>作者：啃魂</th></tr></thead><tbody></tbody></table><p>《幸福武侠》被禁好久了，有空就修改，一直有在改，一直没通过。后来终于有编辑告诉了我原因，主要有两个，一主角结婚的年龄早了些，二母女兼收。有兴趣的朋友可以去‘起点中文网’看一下我写的长篇网络小说：</p><table><thead><tr><th><a class=link href=https://book.qidian.com/info/3077613/ target=_blank rel=noopener>《悟道天龙》</a></th></tr></thead><tbody><tr><td><a class=link href=https://www.qidian.com/Book/1006684093.aspx target=_blank rel=noopener>《龙珠之超级宗师》</a></td></tr></tbody></table></div><div class=author-social><a href=https://github.com/yolialisproxy class=social-link target=_blank title=GitHub><i class="fab fa-github"></i>
+</a><a href=mailto:yoli_alis@2925.com class=social-link target=_blank title=Email><i class="fas fa-envelope"></i>
+</a><a href=https://t.me/kenhunshuchong class=social-link target=_blank title><i class="fas fa-telegram"></i></a></div></div><div class="widget recent-posts-widget"><h3 class=widget-title>最新文章</h3><ul class=recent-posts-list><li class=recent-post-item><a href=/post/%E6%B5%8B%E8%AF%95/ class=recent-post-title>我的测试文章</a>
+<time class=recent-post-date>08-15</time></li><li class=recent-post-item><a href=/posts/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/ class=recent-post-title>我的第一篇文章</a>
+<time class=recent-post-date>08-10</time></li><li class=recent-post-item><a href=/themes/%E7%B4%AB%E9%9F%B5%E6%B5%85%E7%B4%AB%E4%B8%BB%E9%A2%98/ class=recent-post-title>紫韵浅紫主题</a>
+<time class=recent-post-date>08-10</time></li><li class=recent-post-item><a href=/porrtfolio/%E4%BD%9C%E5%93%81%E9%9B%86/ class=recent-post-title>作品集</a>
+<time class=recent-post-date>08-10</time></li><li class=recent-post-item><a href=/tutorial/%E6%95%99%E7%A8%8B/ class=recent-post-title>教程</a>
+<time class=recent-post-date>08-10</time></li></ul></div><div class="widget tags-widget"><h3 class=widget-title>热门标签</h3><div class=widget-tags><a href=/tags/hugo/ class=widget-tag>Hugo
+<span class=tag-count>39</span>
+</a><a href=/tags/%E5%8D%9A%E5%AE%A2/ class=widget-tag>博客
+<span class=tag-count>2</span>
+</a><a href=/tags/%E6%B5%8B%E8%AF%95/ class=widget-tag>测试
+<span class=tag-count>2</span>
+</a><a href=/tags/blog/ class=widget-tag>Blog"
+<span class=tag-count>1</span>
+</a><a href=/tags/minimal/ class=widget-tag>Minimal
+<span class=tag-count>1</span>
+</a><a href=/tags/responsive/ class=widget-tag>Responsive
+<span class=tag-count>1</span>
+</a><a href=/tags/theme/ class=widget-tag>Theme
+<span class=tag-count>1</span>
+</a><a href=/tags/%E4%B8%BB%E9%A2%98/ class=widget-tag>主题
+<span class=tag-count>1</span></a></div></div><div class="widget archive-widget"><h3 class=widget-title>文章归档</h3><ul class=archive-list><li class=archive-item><a href=/archive#2025-08>2025-08 (10)</a></li><li class=archive-item><a href=/archive#0001-01>0001-01 (43)</a></li></ul></div></aside></div></div></div><footer class=site-footer><div class=footer-container><div class=footer-content><p>&copy; 2025 啃魂 保留所有权利。</p></div><div class=social-links><a href=https://github.com/yolialisproxy target=_blank rel="noopener noreferrer">GitHub</a>
+<a href=mailto:yoli_alis@2925.com target=_blank rel="noopener noreferrer">Email</a>
+<a href=https://t.me/kenhunshuchong target=_blank rel="noopener noreferrer"></a></div></div></footer><script type=module src=https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js></script><script type=module src=https://code.jquery.com/jquery-3.5.1.slim.min.js></script><script type=module src=https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js></script><script type=module src=https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js></script><script type=module src=/js/search.js></script><script type=module src=/js/firebaseio.js></script><script type=module src=/js/comment-form.js></script></body></html>

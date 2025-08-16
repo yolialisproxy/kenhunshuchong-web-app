@@ -1,8 +1,7 @@
 +++
-date = '2025-08-08T16:36:26+08:00'
 draft = false
 title = '因为qt的问题，害得我kde桌面都不能用了，改用gnome桌面'
-
+categories =  ["经验心得"]
 +++
 
 ## 2024.3.7

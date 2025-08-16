@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{/* =================================================================
+    list.html - v2.0 | 现代化升级版
+    - 新增: 列表页头部 (list-header)，包含标题、描述和文章数量
+    - 核心: 抽离文章卡片为独立的 partial (_partials/card.html)，实现全站复用
+    - 优化: 使用官方推荐的 .Paginator 进行分页
+    - 优化: 引入 Schema.org/ItemList 结构化数据，提升 SEO
+================================================================= */}}
+
+<div class="list-container" itemscope itemtype="http://schema.org/ItemList">
+
+    <!-- [新增] 增强的列表页头部 -->
+    <header class="list-header">
+        <h1 class="list-title" itemprop="name">{{ .Title }}</h1>
+        {{ with .Content }}
+        <div class="list-description" itemprop="description">
+            {{ . }}
+        </div>
+        {{ end }}
+        <div class="list-meta">
+            共 <span class="post-count">{{ len .Paginator.Pages }}</span> 篇文章
+        </div>
+    </header>
+
+    <!-- 网格布局 -->
+    <div class="post-grid">
+        {{/* [核心] 使用 Hugo 的 Paginator 来循环输出文章 */}}
+        {{ $paginator := .Paginate .Pages.ByPublishDate.Reverse }}
+        {{ range $index, $page := $paginator.Pages }}
+            <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <meta itemprop="position" content="{{ add $index 1 }}">
+                {{ partial "_card.html" . }}
+            </div>
+        {{ end }}
+    </div>
+
+    <!-- 分页 -->
+    <div class="pagination">
+        {{ partial "pagination.html" . }}
+    </div>
+
+</div>
+{{ end }}

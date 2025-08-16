@@ -1,0 +1,55 @@
+<div class="download-table">
+  <table>
+    <thead>
+      <tr>
+        <th>平台</th>
+        <th>文件名</th>
+        <th>大小</th>
+        <th>下载</th>
+        <th>校验和</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range .Page.Params.download.files }}
+      <tr>
+        <td>
+          <i class="icon-{{ .icon }}"></i>
+          {{ if eq .os "windows" }}Windows
+          {{ else if eq .os "macos" }}macOS
+          {{ else if eq .os "linux" }}Linux
+          {{ else }}{{ .os }}{{ end }}
+          {{ if .arch }}({{ .arch }}){{ end }}
+        </td>
+        <td>{{ .name }}</td>
+        <td>{{ .filesize }}</td>
+        <td>
+          <a href="{{ .url }}" class="download-button" download>
+            <i class="icon-download"></i> 下载
+          </a>
+        </td>
+        <td class="checksum">
+          <code>{{ .checksum }}</code>
+          <button class="copy-checksum" data-checksum="{{ .checksum }}">
+            <i class="icon-copy"></i>
+          </button>
+        </td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>
+
+<script>
+document.querySelectorAll('.copy-checksum').forEach(button => {
+  button.addEventListener('click', function() {
+    const checksum = this.getAttribute('data-checksum');
+    navigator.clipboard.writeText(checksum).then(() => {
+      const original = this.innerHTML;
+      this.innerHTML = '<i class="icon-check"></i>';
+      setTimeout(() => {
+        this.innerHTML = original;
+      }, 2000);
+    });
+  });
+});
+</script>

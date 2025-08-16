@@ -1,0 +1,66 @@
+.search-form {
+  --button-size: 88px;
+  --search-border-radius: 12px;
+
+  position: relative;
+  width: 100%;
+  max-width: 300px;   /* 变长：拉大到接近内容宽度上限 */
+  margin: 0 0 1.5rem 0; /* 左对齐，底部空隙 */
+  padding: 0.5rem 0.75rem;
+}
+
+.search-form p { position: relative; margin: 0; }
+
+/* 简化为 placeholder 文案（推荐可用性更高） */
+.search-form label { display: none; }
+
+.search-form input {
+  padding: 3px calc(var(--button-size) + 6px) 3px 3px;
+  border-radius: var(--search-border-radius);
+  background-color: var(--bookish-card-bg);
+  color: var(--bookish-text);
+  border: 1.5px solid transparent;
+  box-shadow: var(--bookish-shadow);
+  font-size: 1.9rem;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  &::placeholder { color: rgba(74,59,107,.6); }
+  &:hover { box-shadow: 0 4px 12px rgba(58,42,93,.18); }
+  &:focus {
+    outline: none;
+    border-color: var(--bookish-light-purple);
+    box-shadow: var(--bookish-shadow), 0 0 0 3px rgba(139,123,184,.15);
+  }
+}
+
+.search-form button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(100% - 10px);
+  width: var(--button-size);
+  border: 0;
+  border-radius: calc(var(--search-border-radius) - 4px);
+  background: var(--bookish-dark-purple);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(42,27,66,.25);
+  transition: transform .15s ease, background-color .2s ease, box-shadow .2s ease;
+
+  &:hover { transform: translateY(-50%) translateX(-1px); box-shadow: 0 5px 12px rgba(42,27,66,.28); }
+  &:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  &:active { transform: translateY(-50%) scale(.98); }
+  svg { width: 22px; height: 22px; stroke-width: 2; color: #fff; }
+}
+
+/* 外围空隙控制（按页面网格调整） */
+.search-form--with-gutters { margin: 0 1rem 1.5rem; }
+
+/* 小屏占满，仍然左对齐 */
+@media (max-width: 768px) {
+  .search-form { max-width: none; }
+  .search-form input { font-size: 1.5rem; padding: 14px calc(var(--button-size) + 10px) 14px 14px; }
+  .search-form button { --button-size: 72px; }
+}

@@ -1,0 +1,168 @@
+// ==============================
+// 导航菜单（浅紫半透明主题）
+// ==============================
+
+// 基础变量（可覆盖）
+$nav-bg: rgba(74, 39, 112, 0.85);  // 半透明深紫
+$nav-text: #f8f5f0;                 // 仿宣纸文字
+$nav-border: rgba(163, 143, 198, 0.4); // 紫灰边框
+$nav-radius: 6px;
+$nav-hover-bg: rgba(163, 143, 198, 0.1);
+$nav-shadow: 0 4px 12px rgba(0,0,0,0.12);
+
+// ==============================
+// 1. 重置 Bootstrap 导航冲突
+// ==============================
+.navbar {
+  padding: 0 !important;
+  background: transparent !important;
+
+  &-light .navbar-nav .nav-link {
+    color: $nav-text;
+  }
+}
+
+// ==============================
+// 2. 导航容器
+// ==============================
+.main-navigation {
+  flex-grow: 1;
+  margin-right: 1rem;
+
+  .nav-collapse {
+    display: block !important;
+    width: 100%;
+  }
+
+  .nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+// ==============================
+// 3. 导航项
+// ==============================
+.nav-item {
+  position: relative;
+
+  > .nav-link {
+    display: block;
+    padding: 1rem 1.25rem;
+    color: $nav-text;
+    border-radius: $nav-radius;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: $nav-hover-bg;
+      color: $nav-text;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+  }
+
+  &.active > .nav-link {
+    font-weight: 600;
+    color: $nav-text;
+    box-shadow: inset 0 -2px 0 $nav-text;
+  }
+}
+
+// ==============================
+// 4. 下拉菜单
+// ==============================
+.has-dropdown {
+  position: relative;
+
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: $nav-bg;
+    border: 1px solid $nav-border;
+    border-radius: $nav-radius;
+    box-shadow: $nav-shadow;
+    z-index: 1000;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+
+    .dropdown-item {
+      display: block;
+      padding: 0.5rem 1.5rem;
+      color: $nav-text;
+      text-decoration: none;
+      border-radius: $nav-radius;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: $nav-hover-bg;
+        color: $nav-text;
+      }
+    }
+  }
+
+  &:hover .dropdown {
+    display: block;
+  }
+
+  // 移动端
+  @media (max-width: 992px) {
+    .dropdown {
+      position: static;
+      display: none;
+      box-shadow: none;
+      border: none;
+      padding-left: 1rem;
+    }
+
+    &.active .dropdown {
+      display: block;
+    }
+
+    > .nav-link::after {
+      content: "▼";
+      font-size: 0.75rem;
+      margin-left: 0.5rem;
+    }
+  }
+}
+
+// ==============================
+// 5. 移动端响应式
+// ==============================
+@media (max-width: 992px) {
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: column;
+    gap: 0;
+
+    .nav-link {
+      padding: 0.75rem 1rem;
+    }
+  }
+}
+
+// ==============================
+// 6. 搜索框
+// ==============================
+.search-form {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0.5rem 0;
+}
+
+// ==============================
+// 7. 整体阴影与半透明增强
+// ==============================
+.navbar,
+.main-navigation,
+.has-dropdown .dropdown {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}

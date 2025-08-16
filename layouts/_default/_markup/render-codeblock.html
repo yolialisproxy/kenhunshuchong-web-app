@@ -1,0 +1,7 @@
+{{- /* layouts/_default/_markup/render-codeblock.html */ -}}
+{{ $lang := .Type | default "code" }}
+<div class="chroma" data-lang="{{ $lang }}">
+  <pre tabindex="0">
+    <code class="language-{{ $lang }}">{{ .Inner | safeHTML }}</code>
+  </pre>
+</div>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "zh-cn" }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- ========== Title ========= -->
+  <title>
+    {{ if .IsHome }}
+      {{ .Site.Title }}
+    {{ else }}
+      {{ .Title }} - {{ .Site.Title }}
+    {{ end }}
+  </title>
+
+  <!-- ========== SEO 基础 ========= -->
+  {{ $desc := .Description | default .Site.Params.description }}
+  <meta name="description" content="{{ $desc }}">
+  {{ with (or .Params.keywords .Site.Params.keywords) }}
+    <meta name="keywords" content="{{ delimit . "," }}">
+  {{ end }}
+  <meta name="author" content="{{ .Params.author | default .Site.Params.author }}">
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="{{ .Title | default .Site.Title }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:url"         content="{{ .Permalink }}">
+  <meta property="og:site_name"   content="{{ .Site.Title }}">
+  <meta name="twitter:card"       content="summary_large_image">
+
+  <!-- Canonical & RSS -->
+  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="alternate" type="application/rss+xml"
+        href="{{ .Site.BaseURL | relURL }}index.xml"
+        title="{{ .Site.Title }}">
+
+  <!-- ========== 样式 ========= -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  {{ $style := resources.Get "scss/style.scss" | toCSS | minify | fingerprint }}
+  <link
+    rel="stylesheet"
+    href="{{ $style.Permalink }}"
+    integrity="{{ $style.Data.Integrity }}"
+    crossorigin="anonymous"
+  >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  {{ if eq .Layout "contact" }}<link rel="stylesheet" href="{{ "/css/contact.css" | relURL }}">{{ end }}
+
+  {{/* 首页才需要 home.css */}}
+  {{ if .IsHome }}
+    <link rel="stylesheet" href="{{ "css/home.css" | relURL }}">
+  {{ end }}
+
+  <!-- 可选：首屏大图预加载（自行替换路径） -->
+  {{ with .Site.Params.hero_preload }}
+    <link rel="preload" as="image" href="{{ . | relURL }}">
+  {{ end }}
+
+  <!-- ========== 预留扩展：子模板可向 head 注入内容 ========= -->
+  {{ block "head_extra" . }}{{ end }}
+
+  <!-- 网站图标 -->
+  <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js",
+      "firebase/database": "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"
+    }
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- ========= Header / Nav ========= -->
+  {{ partialCached "header.html" . }}
+
+    <!-- ========= Main 主要内容区域========= -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <main id="main">
+                  <div id="search-results" class="search-results"></div> <!-- 搜索结果容器 -->
+                    {{ block "main" . }}
+                    <!-- 子模板内容将在这里渲染 -->
+                    {{ end }}
+                </main>
+            </div>
+            <div class="col-md-4">
+                {{ partial "sidebar.html" . }}
+            </div>
+        </div>
+    </div>
+
+  <!-- ========= Footer ========= -->
+  {{ partialCached "footer.html" . }}
+
+    <!-- ========== JS ========= -->
+    {{/* 主脚本按需延迟加载，阻止首屏渲染阻塞 */}}
+    <script type="module" src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
+    <script type="module" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script type="module" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="module" src="{{ "js/search.js" | relURL }}"></script>
+    <script type="module" src="{{ "js/firebaseio.js" | relURL }}"></script>
+    <script type="module" src="{{ "js/comment-form.js" | relURL }}"></script>
+
+  {{ block "body_end_extra" . }}{{ end }}
+</body>
+</html>

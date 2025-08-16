@@ -1,0 +1,277 @@
+// ===================== 书卷浅紫明亮主题 =====================
+:root {
+  // 主色系
+  --bookish-light-purple: #d8c2f0; // 浅紫，标题/强调
+  --bookish-medium-purple: #9b7edb; // 中紫，用于 hover & 小装饰
+  --bookish-dark-purple: #7c5fc3;   // 深紫背景
+  --bookish-dark-gray: #6a5a7a;     // 中性灰紫背景
+  --bookish-card-bg: #fdfafc;       // 卡片/Widget 背景
+  --bookish-text: #4b3b6c;          // 主文本色
+  --bookish-shadow: 0 4px 14px rgba(124, 95, 195, 0.15);
+  --bookish-radius: 12px;
+  --bookish-spacing: 20px;
+  --menu-icon-separation: 10px;
+  --sidebar-element-separation: 20px;
+  --main-top-padding: 2rem;
+  --sidebar-avatar-size: 100px;
+  --emoji-size: 40px;
+  --emoji-font-size: 20px;
+  --sidebar-gutter: 1.5rem;
+  --sidebar-icon-offset: 1.2rem;
+  --link-hover-color: #a98af2;
+}
+
+// ===================== 暗色模式 =====================
+[data-scheme="dark"] {
+  --bookish-light-purple: #c8b7e0;
+  --bookish-medium-purple: #9a7ed0;
+  --bookish-dark-purple: #5a3f9c;
+  --bookish-dark-gray: #3b3354;
+  --bookish-card-bg: #5f4d7a;
+  --bookish-text: #e0d6f5;
+  --bookish-shadow: 0 4px 16px rgba(90, 63, 156, 0.25);
+  --link-hover-color: #d1b8ff;
+}
+
+// ===================== 通用侧边栏 =====================
+.sidebar {
+  color: var(--bookish-text);
+  background-color: var(--bookish-dark-purple);
+  padding: var(--main-top-padding) var(--bookish-spacing);
+  border-radius: var(--bookish-radius);
+  box-shadow: var(--bookish-shadow);
+  transition: all 0.3s ease;
+
+  &.sticky {
+    @include respond(md) { position: sticky; top: 0; }
+  }
+}
+
+// ===================== 左侧边栏 =====================
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sidebar-element-separation);
+  width: 100%;
+
+  &.compact {
+    --sidebar-avatar-size: 80px;
+    --emoji-size: 30px;
+    --emoji-font-size: 15px;
+
+    header {
+      @include respond(lg) { flex-direction: row; }
+      .site-meta { gap: 5px; }
+      .site-name, .site-description { font-size: 1.4rem; }
+    }
+  }
+}
+
+// ===================== 右侧边栏 =====================
+.right-sidebar {
+  display: none;
+  flex-direction: column;
+  gap: var(--sidebar-element-separation);
+  width: 100%;
+  background-color: var(--bookish-dark-purple);
+  padding: var(--main-top-padding);
+
+  &.sticky { top: 0; }
+
+  @include respond(lg) { display: flex; }
+}
+
+// ===================== 侧边栏头部 =====================
+.sidebar header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sidebar-element-separation);
+  z-index: 1;
+
+  .site-avatar {
+    width: var(--sidebar-avatar-size);
+    height: var(--sidebar-avatar-size);
+    border-radius: var(--bookish-radius);
+    overflow: hidden;
+    background: var(--bookish-card-bg);
+    box-shadow: var(--bookish-shadow);
+
+    .site-logo { width: 100%; height: 100%; object-fit: cover; }
+
+    .emoji {
+      position: absolute;
+      width: var(--emoji-size);
+      height: var(--emoji-size);
+      font-size: var(--emoji-font-size);
+      line-height: var(--emoji-size);
+      border-radius: 50%;
+      bottom: 0;
+      right: 0;
+      background-color: var(--bookish-card-bg);
+      box-shadow: var(--bookish-shadow);
+      text-align: center;
+    }
+  }
+
+  .site-meta { display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+
+  .site-name {
+    font-size: 1.6rem;
+    color: var(--bookish-light-purple);
+    margin: 0;
+    font-family: "Georgia", serif;
+    text-shadow: 0 1px 2px rgba(124, 95, 195, 0.2);
+  }
+
+  .site-description {
+    font-size: 1.2rem;
+    color: var(--bookish-text);
+    margin: 0;
+    font-family: "Georgia", serif;
+  }
+}
+
+// ===================== Author Widget =====================
+.author-widget {
+  background: var(--bookish-card-bg);
+  border-radius: var(--bookish-radius);
+  padding: 1.5rem;
+  margin-bottom: var(--sidebar-gutter);
+  box-shadow: var(--bookish-shadow);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124, 95, 195, 0.2);
+  }
+
+  .author-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .author-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+      border: 2px solid rgba(169, 138, 242, 0.3);
+      box-shadow: 0 4px 12px rgba(124, 95, 195, 0.15);
+
+      img { width: 100%; height: 100%; object-fit: cover; }
+    }
+
+    .author-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--bookish-light-purple);
+      margin-bottom: 0.3rem;
+    }
+
+    .author-title {
+      font-size: 1rem;
+      color: var(--bookish-text);
+      font-style: italic;
+    }
+  }
+
+  .author-bio {
+    font-size: 1rem;
+    color: var(--bookish-text);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .author-social {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(169, 138, 242, 0.15);
+      color: var(--bookish-light-purple);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(169, 138, 242, 0.25);
+        color: var(--bookish-medium-purple);
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+// ===================== Widget & 列表 =====================
+.widget {
+  margin-bottom: var(--sidebar-gutter);
+
+  h4 {
+    color: var(--bookish-light-purple);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: var(--sidebar-icon-offset);
+
+    &::before {
+      content: attr(data-icon);
+      position: absolute;
+      left: 0;
+      color: var(--bookish-medium-purple);
+      font-size: 1.2rem;
+    }
+  }
+
+  ul, .archive-item { border-bottom: 1px solid rgba(169, 138, 242, 0.1); }
+
+  li, .archive-item {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateX(4px);
+      box-shadow: 0 2px 6px rgba(169, 138, 242, 0.1);
+      background: rgba(245, 243, 250, 0.5);
+      border-radius: 6px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover { color: var(--link-hover-color); }
+    }
+  }
+}
+
+// ===================== 按钮 & 卡片 =====================
+.btn, .card {
+  background-color: var(--bookish-card-bg);
+  border-radius: var(--bookish-radius);
+  box-shadow: var(--bookish-shadow);
+  padding: 0.6rem 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(124, 95, 195, 0.2);
+  }
+}
+
+// ===================== 文本和链接 =====================
+a { color: var(--bookish-light-purple); transition: color 0.2s ease; }
+a:hover, a:focus { color: var(--bookish-medium-purple); text-decoration: underline; }
+
+p, span, li { color: var(--bookish-text); line-height: 1.6; }
+
+// ===================== 响应式 =====================
+@include respond(sm) { .left-sidebar, .right-sidebar { width: 100%; } }
+@include respond(md) { .sidebar { padding: var(--main-top-padding); } }
+@include respond(lg) { .right-sidebar { display: flex; } }

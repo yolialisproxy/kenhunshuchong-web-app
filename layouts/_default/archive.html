@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="archive">
+  <h1>{{ .Title }}</h1>
+
+  <h2>按分类归档</h2>
+  <div class="categories">
+    {{ range $term, $pages := .Site.Taxonomies.categories }}
+      <div class="category">
+        <h3>
+          <a href="{{ (printf "/categories/%s/" $term) | relURL }}">{{ $term }}</a>
+        </h3>
+        <ul>
+          {{ range $pages }}
+            <li>
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </div>
+
+  <h2>按标签归档</h2>
+  <ul>
+    {{ range $term, $pages := .Site.Taxonomies.tags }}
+      <li>
+        <a href="{{ (printf "/tags/%s/" $term) | relURL }}">{{ $term }}</a> ({{ len $pages }})
+      </li>
+    {{ end }}
+  </ul>
+
+  <h2>按年份归档</h2>
+  <ul>
+    {{ $pages := where .Site.RegularPages "Section" "posts" }}
+    {{ range $pages.GroupByDate "2006" }}
+      <li>
+        <h3>{{ .Key }}</h3>
+        <ul>
+          {{ range .Pages }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{ end }}
+        </ul>
+      </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

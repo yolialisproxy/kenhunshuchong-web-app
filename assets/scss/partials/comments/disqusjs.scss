@@ -1,0 +1,234 @@
+// =======================
+// 主题色变量
+// =======================
+$bookish-light-purple: #d6d0e8;
+$bookish-dark-purple: #3a2a5d;
+$bookish-dark-gray: #2d2d2d;
+$bookish-card-bg: rgba(245, 243, 250, 0.95); // 半透明
+$bookish-text: #4a3b6b;
+$bookish-shadow: 0 4px 12px rgba(58, 42, 93, 0.15);
+
+$border-radius: 8px;
+$card-padding: 1rem;
+
+// =======================
+// 全局重置
+// =======================
+#dsqjs * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#dsqjs ol, #dsqjs ul {
+  list-style: none;
+}
+
+// =======================
+// 容器样式
+// =======================
+.disqus-container {
+  background-color: $bookish-card-bg;
+  border-radius: $border-radius;
+  box-shadow: $bookish-shadow;
+  padding: $card-padding;
+}
+
+// =======================
+// 链接和按钮
+// =======================
+#dsqjs a {
+  text-decoration: none;
+  color: $bookish-dark-purple;
+  transition: color 0.2s ease;
+
+  &:hover, &:focus {
+    color: lighten($bookish-dark-purple, 10%);
+  }
+}
+
+#dsqjs .dsqjs-load-more {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  padding: 11px 14px;
+  margin: 0 0 24px;
+  background: $bookish-dark-gray;
+  color: $bookish-light-purple;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// =======================
+// 评论导航和标签
+// =======================
+#dsqjs .dsqjs-nav {
+  position: relative;
+  margin-bottom: 20px;
+  border-bottom: 2px solid $bookish-dark-gray;
+}
+
+#dsqjs .dsqjs-nav-tab {
+  float: left;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 8px;
+  color: $bookish-light-purple;
+  text-transform: capitalize;
+  display: block;
+  margin-right: 15px;
+  line-height: 1;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+
+  &.dsqjs-tab-active {
+    color: $bookish-text;
+
+    > span:after {
+      content: "";
+      display: block;
+      height: 2px;
+      background-color: $bookish-light-purple;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      right: 0;
+    }
+  }
+}
+
+// =======================
+// 评论列表
+// =======================
+#dsqjs .dsqjs-post-list {
+  .dsqjs-post-item {
+    position: relative;
+    margin-bottom: 16px;
+    background-color: rgba($bookish-light-purple, 0.2);
+    padding: 0.75rem;
+    border-radius: $border-radius;
+    box-shadow: $bookish-shadow;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    .dsqjs-post-avatar {
+      float: left;
+      margin-right: 10px;
+      border-radius: 4px;
+      overflow: hidden;
+
+      img {
+        width: 44px;
+        height: 44px;
+        display: block;
+        border-radius: 4px;
+      }
+    }
+
+    .dsqjs-post-header {
+      font-size: 14px;
+      line-height: 1;
+      margin-bottom: 4px;
+
+      .dsqjs-post-author {
+        color: $bookish-light-purple;
+        font-weight: 700;
+      }
+
+      .dsqjs-meta {
+        font-size: 12px;
+        color: $bookish-light-purple;
+      }
+    }
+
+    .dsqjs-post-body {
+      font-size: 15px;
+      line-height: 1.5;
+      color: $bookish-text;
+
+      code {
+        padding: 0.2em 0.4em;
+        font-size: 85%;
+        background: rgba(200, 190, 220, 0.3);
+        border-radius: 3px;
+      }
+
+      pre {
+        padding: 0.5em;
+        background: rgba(200, 190, 220, 0.3);
+        border-radius: 3px;
+        overflow: auto;
+        font-size: 85%;
+        margin: 0.5em 0;
+      }
+
+      blockquote {
+        padding-left: 0.8em;
+        margin: 0.5em 0;
+        color: $bookish-light-purple;
+        border-left: 3px solid $bookish-dark-gray;
+      }
+    }
+  }
+
+  &.dsqjs-children > li {
+    margin-left: 48px;
+  }
+}
+
+// =======================
+// 响应式设计
+// =======================
+@media (max-width: 768px) {
+  #dsqjs .dsqjs-post-list .dsqjs-post-item {
+    padding: 0.5rem;
+  }
+
+  #dsqjs .dsqjs-nav-tab {
+    font-size: 13px;
+    padding: 10px 6px;
+  }
+
+  #dsqjs .dsqjs-post-body {
+    font-size: 14px;
+  }
+}
+
+// =======================
+// 暗色模式
+// =======================
+[data-scheme="dark"] {
+  $dark-bg: rgba(42, 27, 66, 0.9);
+  $dark-card: rgba(61, 46, 95, 0.95);
+  $dark-text: #d6d0e8;
+
+  .disqus-container {
+    background-color: $dark-card;
+    color: $dark-text;
+    box-shadow: 0 4px 12px rgba(42, 27, 66, 0.3);
+  }
+
+  #dsqjs .dsqjs-post-body {
+    color: $dark-text;
+
+    blockquote {
+      border-left-color: darken($bookish-dark-gray, 10%);
+    }
+  }
+
+  #dsqjs a {
+    color: lighten($dark-text, 10%);
+
+    &:hover {
+      color: lighten($bookish-light-purple, 10%);
+    }
+  }
+}

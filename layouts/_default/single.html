@@ -1,13 +1,112 @@
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "{{ .Title | htmlEscape }}",
-  "datePublished": "{{ .PublishDate.UTC.Format "2006-01-02T15:04:05Z07:00" }}",
-  "dateModified": "{{ .Lastmod.UTC.Format "2006-01-02T15:04:05Z07:00" }}",
-  "author": { "@type": "Person", "name": "{{ .Site.Params.author }}" },
-  "image": "{{ with .Params.cover }}{{ . }}{{ else }}{{ .Site.Params.ogImage }}{{ end }}",
-  "description": "{{ with .Params.description }}{{ . | htmlEscape }}{{ else }}{{ .Summary | plainify | truncate 200 | htmlEscape }}{{ end }}",
-  "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ .Permalink }}" }
-}
-</script>
+{{ define "main" }}
+
+<div class="post-container">
+    {{/* [升级] 将文章包裹在卡片中，并添加 SEO 结构化数据 */}}
+    <article class="post-single-card" itemscope itemtype="http://schema.org/BlogPosting">
+
+        {{/* [新增] 文章封面图 */}}
+        {{ with .Params.image }}
+        <div class="post-cover">
+            <img src="{{ . | absURL }}" alt="{{ $.Title }}" loading="lazy" itemprop="image">
+        </div>
+        {{ end }}
+
+        <div class="post-content-wrapper">
+            <!-- [升级] 经过重构的文章头部信息 -->
+            <header class="post-header-enhanced">
+                <h1 class="post-title" itemprop="headline">{{ .Title }}</h1>
+
+                <!-- [升级] 优化的文章元信息 -->
+                <div class="post-meta-enhanced">
+                    <span class="meta-item author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                        <i class="fas fa-user-circle"></i>
+                        <span itemprop="name">{{ .Params.author | default .Site.Params.author.name }}</span>
+                    </span>
+                    <span class="meta-item date">
+                        <i class="fas fa-calendar-alt"></i>
+                        {{ $dateMachine := .Date.Format "2006-01-02T15:04:05-07:00" }}
+                        {{ $dateHuman := .Date.Format "2006年01月02日" }}
+                        <time datetime="{{ $dateMachine }}" itemprop="datePublished">{{ $dateHuman }}</time>
+                    </span>
+                    <span class="meta-item reading-time">
+                        <i class="fas fa-clock"></i>
+                        <span>{{ .ReadingTime }} 分钟</span>
+                    </span>
+                    <span class="meta-item word-count">
+                        <i class="fas fa-file-word"></i>
+                        <span>{{ .WordCount }} 字</span>
+                    </span>
+                </div>
+
+                <!-- 分类和标签 -->
+                <div class="post-terms">
+                    {{ with .GetTerms "categories" }}
+                    <div class="term-group">
+                        <i class="fas fa-folder-open"></i>
+                        {{ range . }}
+                            <a href="{{ .RelPermalink }}" class="term-link category">{{ .LinkTitle }}</a>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                    {{ with .GetTerms "tags" }}
+                    <div class="term-group">
+                        <i class="fas fa-tags"></i>
+                        {{ range . }}
+                            <a href="{{ .RelPermalink }}" class="term-link tag">#{{ .LinkTitle }}</a>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </header>
+
+            {{/* [新增] 自动目录 (TOC) */}}
+            {{ if and (ne .TableOfContents "<nav id=\"TableOfContents\"></nav>") (.Params.showToc | default true) }}
+            <div class="toc-container">
+                <h2 class="toc-title"><i class="fas fa-list-ul"></i> 文章目录</h2>
+                <div class="toc-content">
+                    {{ .TableOfContents }}
+                </div>
+            </div>
+            {{ end }}
+
+            <!-- [升级] 带有 itemprop 的文章内容容器 -->
+            <div class="post-content-enhanced" itemprop="articleBody">
+                {{ .Content }}
+            </div>
+
+            <!-- [新增] 社交分享 -->
+            <div class="social-share">
+                <span>分享到：</span>
+                <a href="https://service.weibo.com/share/share.php?url={{ .Permalink }}&title={{ .Title }}" target="_blank" rel="noopener noreferrer" aria-label="分享到新浪微博" class="share-btn weibo"><i class="fab fa-weibo"></i></a>
+                <a href="https://connect.qq.com/widget/shareqq/index.html?url={{ .Permalink }}&title={{ .Title }}&source={{ .Site.Title }}&desc={{ .Summary }}" target="_blank" rel="noopener noreferrer" aria-label="分享到QQ" class="share-btn qq"><i class="fab fa-qq"></i></a>
+                <a href="https://telegram.me/share/url?url={{ .Permalink }}&text={{ .Title }}" target="_blank" rel="noopener noreferrer" aria-label="分享到Telegram" class="share-btn telegram"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+
+        </div>
+
+    </article>
+
+    <!-- 评论区 -->
+    <div class="comments-container post-single-card">
+        {{ partial "comments.html" . }}
+    </div>
+
+    <!-- 文章底部导航 -->
+    <nav class="post-nav">
+        {{ partial "pagination.html" . }}
+    </nav>
+
+    <!-- 相关文章推荐 -->
+    {{ $related := .Site.RegularPages.Related . | first 3 }}
+    {{ with $related }}
+    <section class="related-posts">
+        <h3 class="related-title">相关文章</h3>
+        <div class="related-posts-grid">
+            {{ range . }}
+                {{ .Render "summary-card" }} {{/* [升级] 使用卡片模板渲染 */}}
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+</div>
+{{ end }}

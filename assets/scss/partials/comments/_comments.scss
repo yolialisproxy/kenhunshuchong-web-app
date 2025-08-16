@@ -1,0 +1,346 @@
+// ==============================
+// 主题变量
+// ==============================
+$primary-color: #a594f9;    // 浅紫色
+$secondary-color: #6e6e7e;  // 中灰色
+$text-color: #d8c7ff;       // 主文字色
+$background-color: rgba(255, 255, 255, 0.85); // 半透明背景
+$card-bg: rgba(255, 255, 255, 0.9);
+$card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+$border-radius: 12px;
+$accent-color: #b3deff;
+$error-color: #ff6b6b;
+$hover-color: rgba(165, 149, 249, 0.1);
+$transition: 0.3s ease;
+$primary-medium-purple: #9353d3;
+$primary-dark-purple: #5227ad;
+$text-dark: #2a2a2a;
+$bg-card: rgba(255, 255, 255, 0.9); // 浅色半透明背景
+$border-color: #ddd;
+$radius-md: 12px;
+$padding-base: 1.5rem;
+$spacing-half: 0.75rem;
+
+// ==============================
+// 评论容器
+// ==============================
+#comments {
+  margin: 4rem 0 2rem;
+  padding: 0 1rem;
+  background: $background-color;
+  border-top: 1px solid $secondary-color;
+  border-bottom: 1px solid $secondary-color;
+  border-radius: $border-radius;
+
+  &__title {
+    font-size: clamp(1.5rem, 2.5vw, 1.8rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: $text-color;
+  }
+
+  &__auth, &__new {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: $card-bg;
+    border-radius: $border-radius;
+    border: 1px solid $secondary-color;
+    box-shadow: $card-shadow;
+  }
+
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.75rem;
+  }
+}
+
+// ==============================
+// 登录区
+// ==============================
+#auth-area {
+  margin-bottom: 1.5rem;
+
+  #auth-actions {
+    display: flex;
+    gap: 1rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: $border-radius / 2;
+      font-size: 1.275rem;
+      cursor: pointer;
+      transition: all $transition;
+
+      &.login-google { background: $background-color; color: $secondary-color; border: 1px solid $secondary-color; }
+      &.login-anon { background: $card-bg; color: $secondary-color; border: 1px solid $secondary-color; }
+      &.logout { background: $error-color; color: #fff; border: none; }
+
+      &:hover { opacity: 0.9; }
+    }
+  }
+
+  #whoami {
+    font-size: 1.275rem;
+    color: $secondary-color;
+  }
+}
+
+// ==============================
+// 新评论输入框
+// ==============================
+#new-comment {
+  margin-bottom: 1.5rem;
+
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid $secondary-color;
+    border-radius: $border-radius / 2;
+    resize: vertical;
+    min-height: 100px;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    background: $background-color;
+
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+    }
+  }
+
+  .count-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 1.275rem;
+    color: $secondary-color;
+  }
+
+  button {
+    background: $primary-color;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: $border-radius / 2;
+    cursor: pointer;
+    transition: all $transition;
+
+    &:hover { background: darken($primary-color, 15%); }
+    &:disabled { background: $secondary-color; cursor: not-allowed; }
+  }
+}
+
+// ==============================
+// 评论列表
+// ==============================
+#comment-list, .comments__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .cmt-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: $card-bg;
+    border-radius: $border-radius;
+    box-shadow: $card-shadow;
+    transition: transform $transition, background $transition;
+
+    &:hover { transform: translateY(-2px); background: $hover-color; }
+
+    .cmt-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.275rem;
+      color: $secondary-color;
+
+      .user-avatar { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+    }
+
+    .cmt-body { font-size: 1.4rem; line-height: 1.5; color: $text-color; word-break: break-word; }
+
+    .cmt-actions {
+      display: flex;
+      gap: 1rem;
+
+      button { background: none; border: none; cursor: pointer; color: $secondary-color; transition: color $transition;
+        &:hover { color: $primary-color; text-decoration: underline; }
+      }
+    }
+  }
+
+  // 回复框
+  .reply-box {
+    margin-top: 0.75rem;
+    padding: 1rem;
+    background: lighten($card-bg, 5%);
+    border-radius: $border-radius / 2;
+
+    textarea { font-size: 1.275rem; padding: 0.5rem; }
+
+    button { background: $primary-color; color: #fff; padding: 0.25rem 0.75rem;
+      &:hover { background: darken($primary-color, 15%); }
+    }
+  }
+
+  // 子评论
+  .children {
+    margin-left: 2rem;
+    border-left: 2px solid $secondary-color;
+    padding-left: 1rem;
+  }
+}
+
+// ==============================
+// 动画
+// ==============================
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px);} to { opacity:1; transform:translateY(0);} }
+.cmt-item { animation: fadeIn 0.3s ease; }
+
+// ==============================
+// 响应式
+// ==============================
+@media (max-width: 768px) {
+  #comments { padding: 0 1rem; }
+  .cmt-item { padding: 0.75rem; }
+  .cmt-meta { font-size: 0.95rem; }
+  .cmt-body { font-size: 1.275rem; }
+}
+
+// ==============================
+// 暗色模式
+// ==============================
+@media (prefers-color-scheme: dark) {
+  #comments { background: rgba(30,30,30,0.85); }
+  .cmt-item, .reply-box { background: rgba(50,50,50,0.85); border-color: #555; }
+  .cmt-actions button { color: #aaa; &:hover { color: $primary-color; } }
+}
+
+
+
+.comments-section {
+    background: $bg-card;
+    border-radius: $radius-md;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+    padding: $padding-base * 1.5;
+    margin-top: 2.5rem;
+    color: $text-dark;
+
+    .comments-title, .comments-list-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: $primary-dark-purple;
+        margin-bottom: $padding-base;
+        text-align: center;
+    }
+    .comments-description {
+        font-size: 0.95rem;
+        color: lighten($text-dark, 20%);
+        text-align: center;
+        margin-bottom: $padding-base;
+    }
+
+    .comment-form {
+        margin-bottom: $padding-base * 2;
+        padding-bottom: $padding-base;
+        border-bottom: 1px solid $border-color;
+    }
+
+    .form-group {
+        margin-bottom: $padding-base;
+        label {
+            display: block;
+            margin-bottom: $spacing-half;
+            font-weight: 500;
+            color: $text-dark;
+            .required-star {
+                color: crimson;
+                margin-left: 0.2em;
+            }
+        }
+        .form-input {
+            width: 100%;
+            padding: $spacing-half * 1.5 $padding-base;
+            border: 1px solid $border-color;
+            border-radius: $radius-md / 2;
+            font-size: 1rem;
+            color: $text-dark;
+            background-color: white;
+            &:focus {
+                outline: none;
+                border-color: $primary-medium-purple;
+                box-shadow: 0 0 0 3px rgba($primary-medium-purple, 0.2);
+            }
+        }
+        textarea.form-input {
+            resize: vertical;
+        }
+    }
+
+    .btn--primary { /* 复用您现有的按钮样式 */
+        // 根据您的主 SCSS 中定义
+        // background: linear-gradient(90deg, $primary-accent-purple 60%, $primary-medium-purple 100%);
+        // color: $text-light;
+        // box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        // ...
+    }
+
+    .comment-message {
+        margin-top: $padding-base;
+        padding: $spacing-half;
+        border-radius: $radius-md / 2;
+        text-align: center;
+        font-weight: 500;
+        &.info {
+            background-color: #e0f2f7;
+            color: #2196f3;
+        }
+        &.success {
+            background-color: #e8f5e9;
+            color: #4caf50;
+        }
+        &.error {
+            background-color: #ffebee;
+            color: #f44336;
+        }
+    }
+
+    .comments-list {
+        margin-top: $padding-base;
+        .comment-item {
+            background-color: rgba($primary-light-purple, 0.1);
+            border: 1px solid rgba($primary-light-purple, 0.3);
+            border-radius: $radius-md / 2;
+            padding: $padding-base;
+            margin-bottom: $padding-base;
+            .comment-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: $spacing-half;
+                .comment-author {
+                    font-weight: bold;
+                    color: $primary-medium-purple;
+                }
+                .comment-date {
+                    font-size: 0.85rem;
+                    color: lighten($text-dark, 40%);
+                }
+            }
+            .comment-content {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                color: $text-dark;
+            }
+        }
+        p { /* Placeholder for "加载评论中..." */
+            text-align: center;
+            color: lighten($text-dark, 30%);
+        }
+    }
+}

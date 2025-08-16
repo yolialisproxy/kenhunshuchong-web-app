@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "firebase": "^12.1.0"
+  },
+  "name": "kenhunshuchong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yolialisproxy/kenhunshuchong-web-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/yolialisproxy/kenhunshuchong-web-app/issues"
+  },
+  "homepage": "https://github.com/yolialisproxy/kenhunshuchong-web-app#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.3.0"
+  }
+}

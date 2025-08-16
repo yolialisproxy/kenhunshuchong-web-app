@@ -1,0 +1,81 @@
+{{ define "main" }}
+
+<!-- ========= Hero 区 ========= -->
+<section class="hero">
+  <div class="hero__inner">
+    <h1 class="hero__title">{{ .Site.Title }}</h1>
+    {{ with .Site.Params.tagline }}
+      <p class="hero__tagline">{{ . }}</p>
+    {{ end }}
+    {{ with .Site.Params.hero_button }}
+      <a class="btn btn--primary" href="{{ .url }}">{{ .text }}</a>
+    {{ end }}
+  </div>
+</section>
+
+<!-- ========= Featured Post ========= -->
+{{ $featured := first 1 (where .Site.RegularPages "Params.featured" true) }}
+{{ if $featured }}
+  {{ with index $featured 0 }}
+    <section class="featured">
+      <h2 class="section-title">精选文章</h2>
+      <article class="featured__card">
+        <a href="{{ .Permalink }}">
+          {{ with .Params.cover }}
+            <img class="featured__cover" src="{{ . | relURL }}" alt="">
+          {{ end }}
+          <div class="featured__content">
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Summary }}</p>
+            <span class="btn btn--ghost">阅读全文 →</span>
+          </div>
+        </a>
+      </article>
+    </section>
+  {{ end }}
+{{ end }}
+
+<!-- ========= 最近文章 ========= -->
+<section class="recent">
+  <h2 class="section-title">最新发布</h2>
+  <div class="post-grid">
+    {{ range first 6 (where .Site.RegularPages "Type" "in" site.Params.mainSections) }}
+      <article class="post-card">
+        <a href="{{ .Permalink }}">
+          {{ with .Params.cover }}
+            <img class="post-card__thumb" src="{{ . | relURL }}" alt="">
+          {{ end }}
+          <h3 class="post-card__title">{{ .Title }}</h3>
+          <time class="post-card__date">{{ .Date.Format "2006-01-02" }}</time>
+        </a>
+      </article>
+    {{ end }}
+  </div>
+</section>
+
+<!-- ========= 标签云 ========= -->
+{{ $tags := .Site.Taxonomies.tags }}
+{{ if gt (len $tags) 0 }}
+  <section class="tag-cloud">
+    <h2 class="section-title">标签云</h2>
+    <div class="tag-cloud__inner">
+      {{ range $key, $val := sort $tags "Count" "desc" }}
+        <a class="tag-badge" href="{{ "/tags/" | relLangURL }}{{ $key | urlize }}">
+          {{ $key }} ({{ $val.Count }})
+        </a>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}
+
+<!-- ========= 订阅区 ========= -->
+<section class="cta">
+  <h2>订阅更新</h2>
+  <p>输入邮箱即可收到最新文章通知。</p>
+  <form class="cta__form">
+    <input type="email" placeholder="you@example.com" required>
+    <button class="btn btn--primary" type="submit">订阅</button>
+  </form>
+</section>
+
+{{ end }}  <!-- /define main -->

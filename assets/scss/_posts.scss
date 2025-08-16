@@ -1,0 +1,163 @@
+/* ===================================================================
+   posts.scss - v4.0 | 最终修复版
+   - 修复: 采用“链接包裹内容”的最佳实践，从根本上解决了整卡点击问题。
+   - 优化: 样式现在基于新的、更健壮的 HTML 结构，代码更简洁、更稳定。
+   - 升级: 整个卡片现在作为一个统一的交互单元，悬停效果覆盖全局。
+   - 兼容: 保留了底部标签可独立点击的特性，并优化了其视觉样式。
+   =================================================================== */
+
+// ===================================================================
+// 1. 变量定义 (Variables)
+// ===================================================================
+$primary-light-purple: #e6e0ff;
+$primary-medium-purple: #9353d3;
+$primary-dark-purple: #5227ad;
+$primary-accent-purple: #bb86fc;
+$text-light: #f5f0ff;
+$text-secondary: rgba(245, 240, 255, 0.75);
+$shadow-color-light: rgba(82, 39, 173, 0.15);
+$shadow-color-hover: rgba(82, 39, 173, 0.25);
+$bg-card: rgba(46, 26, 71, 0.9);
+$radius: 18px;
+$transition: 0.25s cubic-bezier(0.39, 0.575, 0.565, 1);
+$shadow-base: 0 6px 18px $shadow-color-light;
+$shadow-hover: 0 10px 28px $shadow-color-hover;
+$spacing-md: 1rem;
+$spacing-lg: 1.25rem;
+$spacing-xl: 1.5rem;
+
+
+// ===================================================================
+// 2. 核心布局与组件 (Layout & Components)
+// ===================================================================
+
+/* 文章卡片容器 */
+.post-card {
+  background: $bg-card;
+  border-radius: $radius;
+  box-shadow: $shadow-base;
+  transition: transform $transition, box-shadow $transition;
+  display: flex; // 确保内部链接可以撑满高度
+  backdrop-filter: blur(12px) saturate(120%);
+  border: 1px solid rgba($primary-light-purple, 0.1);
+
+  // 当卡片（或其内部的链接）被悬停或聚焦时，应用提升效果
+  &:hover,
+  &:focus-within {
+    transform: translateY(-8px);
+    box-shadow: $shadow-hover;
+  }
+}
+
+/*
+  关键：链接包裹器 (<a> 标签)
+  - 让它成为一个 flex 容器，完美包裹内部内容。
+  - 继承父元素的高度，并移除默认的链接样式。
+*/
+.post-card__link-wrapper {
+  display: flex;
+  flex-grow: 1;
+  text-decoration: none; // 移除下划线
+  color: inherit; // 继承 .post-card 的文字颜色
+
+  // 当链接本身被悬停时，改变标题颜色作为反馈
+  &:hover .post-card__title {
+      // 改变渐变的起始颜色，产生动态效果
+      background: linear-gradient(135deg, lighten($primary-light-purple, 5%), $primary-accent-purple);
+      -webkit-background-clip: text;
+      background-clip: text;
+  }
+}
+
+/* 卡片内容区域 */
+.post-card__content {
+  padding: $spacing-lg $spacing-xl;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 卡片标题 (H2) */
+.post-card__title {
+  color: $primary-medium-purple; // Fallback
+  background: linear-gradient(135deg, $primary-light-purple, $primary-accent-purple);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin: 0;
+  transition: background $transition; // 为悬停时的渐变添加过渡
+}
+
+/* 元信息：包含日期和阅读时间 */
+.post-card__meta {
+  color: $text-secondary;
+  font-size: 0.85rem;
+  margin-bottom: $spacing-md;
+  order: -1;
+}
+
+/* 文章摘要 */
+.post-summary {
+  color: $text-secondary;
+  margin: $spacing-lg 0;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  flex-grow: 1;
+
+  h1, h2, h3, h4, h5, h6 { display: none; }
+  p { margin-bottom: 0.5em; }
+}
+
+/* 标签容器 */
+.post-tags {
+  margin-top: $spacing-md;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* 标签按钮 */
+.tag-button {
+  background-color: rgba($primary-light-purple, 0.1);
+  color: $primary-accent-purple;
+  border: 1px solid rgba($primary-accent-purple, 0.2);
+  border-radius: 20px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color $transition, color $transition, transform $transition;
+
+  // 关键：虽然整个卡片是链接，但标签可以独立点击。
+  // 我们不需要 z-index，因为它们已经是独立的<a>标签。
+  position: relative;
+
+  &:hover {
+    background-color: $primary-medium-purple;
+    color: $text-light;
+    transform: translateY(-2px);
+  }
+}
+
+
+// ===================================================================
+// 3. 响应式与网格布局 (Responsive & Grid)
+// ===================================================================
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-xl;
+}
+
+@media (max-width: 600px) {
+  .post-card__title {
+    font-size: 1.4rem;
+  }
+  .post-grid {
+      gap: $spacing-lg;
+  }
+}

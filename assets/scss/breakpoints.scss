@@ -1,0 +1,125 @@
+/* ===== 主题配色（书卷气 + 明亮半透明） ===== */
+$color-light-purple: #d8c2f0;  // 浅紫（主色）
+$color-deep-purple: rgba(42, 27, 61, 0.9); // 深紫背景 + 半透明
+$color-dark-gray: rgba(26, 26, 26, 0.95);  // 特别深色区域
+$color-muted-purple: #a38fc6;  // 辅助紫灰
+$color-paper: #f8f5f0;         // 仿宣纸色（文字）
+
+/* ===== 响应式断点 ===== */
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px
+);
+
+/* ===== 响应式 Mixin ===== */
+@mixin respond($breakpoint) {
+  @if not map-has-key($breakpoints, $breakpoint) {
+    @warn "'#{$breakpoint}' is not a valid breakpoint";
+  } @else {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
+/* ===== 全局主题容器（书卷气 + 半透明） ===== */
+.theme-container {
+  background-color: $color-deep-purple;
+  color: $color-light-purple;
+  font-family: "Songti SC", "Noto Serif SC", serif;
+  line-height: 1.8;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(6px); // 半透明模糊效果
+  -webkit-backdrop-filter: blur(6px);
+
+  /* 链接样式 */
+  a {
+    color: $color-light-purple;
+    text-decoration: none;
+    border-bottom: 1px dotted $color-muted-purple;
+    transition: color 0.3s, border-color 0.3s;
+
+    &:hover {
+      color: $color-paper;
+      border-bottom-color: $color-paper;
+    }
+  }
+
+  /* 小节标题 */
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 1rem 0 0.5rem;
+    color: $color-paper;
+    padding: 0.5rem 0.75rem;
+    background-color: rgba(43, 29, 61, 0.75);
+    border-left: 4px solid $color-muted-purple;
+
+    a {
+      color: $color-paper;
+
+      &:hover {
+        color: $color-light-purple;
+      }
+    }
+  }
+
+  /* 响应式内边距 */
+  @include respond(md) {
+    padding: 2rem;
+  }
+
+  @include respond(lg) {
+    padding: 2.5rem;
+  }
+}
+
+/* ===== 深灰强调区（可复用） ===== */
+.deep-section {
+  background-color: $color-dark-gray;
+  color: $color-light-purple;
+  padding: 1.5rem;
+  border-left: 4px solid $color-muted-purple;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+/* ===== 通用半透明卡片 ===== */
+.card {
+  background-color: rgba(52, 34, 85, 0.85); // 半透明紫
+  color: $color-paper;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
+}
+
+/* ===== 响应式容器宽度 ===== */
+.container {
+  width: 100%;
+  margin: 0 auto;
+
+  @include respond(md) {
+    max-width: 720px;
+  }
+  @include respond(lg) {
+    max-width: 1024px;
+  }
+  @include respond(xl) {
+    max-width: 1280px;
+  }
+  @include respond(2xl) {
+    max-width: 1536px;
+  }
+}

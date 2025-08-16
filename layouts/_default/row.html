@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+
+  <div class="row">
+    {{ range .Pages }}
+      <div class="col-md-6">
+        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        <p>{{ .Summary }}</p>
+        <a href="{{ .Permalink }}" class="btn btn-secondary">阅读全文</a>
+      </div>
+    {{ end }}
+  </div>
+{{ end }}

@@ -1,0 +1,30 @@
+// 主题变量
+$primary-color: #9b8fc1; // 浅紫色
+$primary-hover: #7d6faa;
+$bg-color: #f9f8fc;
+$text-color: #333;
+$muted-text: #777;
+$border-radius: 10px;
+$shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+body {
+  font-family: 'Noto Serif SC', serif;
+  background: $bg-color;
+  color: $text-color;
+  line-height: 1.7;
+}
+
+// 按钮/标签
+.term-badge {
+  display: inline-block;
+  background: $primary-color;
+  color: white;
+  padding: 4px 10px;
+  border-radius: $border-radius;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  &:hover {
+    background: $primary-hover;
+  }
+}

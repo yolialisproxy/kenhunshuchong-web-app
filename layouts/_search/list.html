@@ -1,0 +1,100 @@
+{{ define "main" }}
+<section class="search-page">
+    <header class="search-header">
+        <h1>站内搜索</h1>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="输入关键词搜索文章..." autocomplete="off">
+            <button id="searchButton">搜索</button>
+        </div>
+    </header>
+
+    <div id="searchResults" class="search-results">
+        <div class="search-placeholder">
+            <p>输入关键词开始搜索</p>
+        </div>
+    </div>
+
+    <!-- 热门搜索建议 -->
+    <div class="search-suggestions">
+        <h3>热门标签</h3>
+        <div class="suggestion-tags">
+            {{ range first 10 site.Taxonomies.tags.ByCount }}
+                <button class="suggestion-tag" data-search="{{ .Page.Title }}">
+                    {{ .Page.Title }}
+                </button>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<script>
+// 简单的搜索功能实现
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const searchButton = document.getElementById('searchButton');
+
+    // 搜索数据（需要配合搜索索引）
+    let searchIndex = [];
+
+    // 获取搜索索引
+    fetch('/index.json')
+        .then(response => response.json())
+        .then(data => {
+            searchIndex = data;
+        });
+
+    function performSearch(query) {
+        if (!query.trim()) {
+            searchResults.innerHTML = '<div class="search-placeholder"><p>输入关键词开始搜索</p></div>';
+            return;
+        }
+
+        const results = searchIndex.filter(item =>
+            item.title.toLowerCase().includes(query.toLowerCase()) ||
+            item.content.toLowerCase().includes(query.toLowerCase()) ||
+            (item.tags && item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())))
+        );
+
+        if (results.length === 0) {
+            searchResults.innerHTML = '<div class="search-no-results"><p>没有找到相关内容</p></div>';
+            return;
+        }
+
+        let html = `<div class="search-results-header"><p>找到 ${results.length} 条相关结果</p></div>`;
+
+        results.forEach(result => {
+            html += `
+                <article class="search-result-item">
+                    <h3><a href="${result.permalink}">${result.title}</a></h3>
+                    <p class="search-summary">${result.summary}</p>
+                    <div class="search-meta">
+                        <time>${result.date}</time>
+                        ${result.tags ? result.tags.map(tag => `<span class="search-tag">#${tag}</span>`).join('') : ''}
+                    </div>
+                </article>
+            `;
+        });
+
+        searchResults.innerHTML = html;
+    }
+
+    searchInput.addEventListener('input', (e) => {
+        performSearch(e.target.value);
+    });
+
+    searchButton.addEventListener('click', () => {
+        performSearch(searchInput.value);
+    });
+
+    // 建议标签点击搜索
+    document.querySelectorAll('.suggestion-tag').forEach(tag => {
+        tag.addEventListener('click', (e) => {
+            const searchTerm = e.target.getAttribute('data-search');
+            searchInput.value = searchTerm;
+            performSearch(searchTerm);
+        });
+    });
+});
+</script>
+{{ end }}

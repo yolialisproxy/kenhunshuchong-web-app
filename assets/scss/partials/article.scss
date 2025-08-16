@@ -1,0 +1,183 @@
+/* ===== 颜色变量抽取（可以放到 variables.scss） ===== */
+$color-text-main: rgba(1, 1, 1, 0.95);
+$color-text-purple: rgba(74, 39, 112, 0.95);
+$color-bg-purple-light: rgba(74, 39, 112, 0.5);
+$color-bg-purple-deep: var(--deep-purple);
+
+/* ===== 通用占位符 ===== */
+%hover-lift {
+  transition: transform var(--transition), box-shadow var(--transition);
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-l2);
+  }
+}
+
+%title-underline {
+  position: relative;
+  padding-bottom: 0.3rem;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: var(--accent-purple);
+    transition: width 0.3s ease;
+  }
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+%tag-style {
+  color: $color-text-purple;
+  background-color: var(--medium-purple);
+  padding: 8px 16px;
+  border-radius: var(--tag-border-radius);
+  font-size: 1.4rem;
+  display: inline-block;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.2) 45%, rgba(255, 255, 255, 0.2) 55%, transparent 55%);
+    background-size: 10px 10px;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  &:hover {
+    background-color: var(--accent-purple);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px var(--shadow);
+    &::before { opacity: 0.3; }
+  }
+}
+
+/* ===== 默认文章列表 ===== */
+.article-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-separation);
+
+  article {
+    @extend %hover-lift;
+    display: flex;
+    flex-direction: column;
+    background-color: $color-bg-purple-light;
+    box-shadow: var(--shadow-l1);
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--medium-purple), var(--accent-purple));
+    }
+
+    .article-image img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      @include respond(md) { height: 200px; }
+      @include respond(xl) { height: 250px; }
+    }
+
+    @for $i from 1 through length($defaultTagBackgrounds) {
+      &:nth-child(#{length($defaultTagBackgrounds)}n + #{$i}) {
+        .article-category a {
+          background: nth($defaultTagBackgrounds, $i);
+          color: nth($defaultTagColors, $i);
+        }
+      }
+    }
+  }
+}
+
+/* ===== 文章详情 ===== */
+.article-details {
+  color: $color-text-purple;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--card-padding);
+  gap: 15px;
+  font-family: var(--font-main);
+}
+
+.article-title {
+  font-family: var(--article-font-family);
+  font-weight: 600;
+  margin: 0;
+  color: $color-text-main;
+  font-size: 2.2rem;
+  @include respond(xl) { font-size: 2.4rem; }
+  @extend %title-underline;
+
+  &::after { width: 50px; }
+
+  a {
+    color: inherit;
+    transition: color var(--transition);
+    &:hover { color: var(--accent-purple); }
+  }
+}
+
+.article-subtitle {
+  font-weight: normal;
+  color: $color-text-main;
+  line-height: 1.5;
+  margin: 0;
+  font-size: 1.75rem;
+  font-style: italic;
+  @include respond(xl) { font-size: 2rem; }
+}
+
+.article-time,
+.article-translations {
+  display: flex;
+  gap: 15px;
+  color: $color-text-main;
+
+  svg {
+    vertical-align: middle;
+    width: 20px; height: 20px;
+    stroke-width: 1.33;
+    flex-shrink: 0;
+    stroke: var(--medium-purple);
+    transition: stroke var(--transition);
+  }
+
+  time, a {
+    font-size: 1.4rem;
+    color: inherit;
+    transition: color var(--transition);
+  }
+
+  &:hover {
+    svg { stroke: var(--accent-purple); }
+    time, a { color: var(--accent-purple); }
+  }
+
+  & > div {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+}
+
+/* ===== 标签与分类 ===== */
+.article-category a,
+.article-tags a {
+  @extend %tag-style;
+}

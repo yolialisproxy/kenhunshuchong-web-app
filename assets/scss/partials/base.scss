@@ -1,0 +1,140 @@
+// ==================== 变量定义 ====================
+$deep-purple: #6a0dad;
+$light-purple: #f3e5f5;
+$medium-purple: #8e44ad;
+$accent-purple: #9e69ff;
+$text-main: #2b2b2b;
+$text-light: #f9f6fb;
+$bookish-text: #d6c4e0;
+$bookish-light-purple: #c8a2ff;
+$bookish-card-bg: #f9f6fb;
+$shadow-color: rgba(0, 0, 0, 0.15);
+$transition-default: all 0.3s ease;
+
+// ==================== 全局基础样式 ====================
+html {
+  font-size: 62.5%;
+  overflow-y: scroll;
+  font-family: var(--font-main, 'Noto Serif SC', serif);
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: auto;
+  scrollbar-color: $medium-purple $light-purple;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $medium-purple;
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px $shadow-color;
+    transition: $transition-default;
+
+    &:hover {
+      background-color: $accent-purple;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $light-purple;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main, 'Noto Serif SC', serif);
+  font-size: 1.6rem;
+  color: $text-main;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: $deep-purple;
+  background-image:
+    linear-gradient(rgba(75, 59, 96, 0.5), rgba(106, 75, 123, 0.5)),
+    url('/images/background.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), transparent);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+// ==================== 文本与链接 ====================
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    color: $accent-purple;
+    transform: translateY(-1px);
+  }
+}
+
+p {
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: $bookish-text;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-main, 'Noto Serif SC', serif);
+  font-weight: 600;
+  color: $bookish-light-purple;
+  margin-bottom: 1.2rem;
+}
+
+// ==================== 布局容器 ====================
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+// ==================== 表单元素 ====================
+input,
+textarea,
+select {
+  font-size: 1.6rem;
+  padding: 0.8rem;
+  border: 1px solid $bookish-light-purple;
+  border-radius: 4px;
+  background-color: $bookish-card-bg;
+  color: $text-main;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: $accent-purple;
+    outline: none;
+  }
+}
+
+// ==================== 按钮 ====================
+button {
+  font-size: 1.6rem;
+  background-color: $medium-purple;
+  color: $text-light;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: $accent-purple;
+    transform: translateY(-1px);
+  }
+}

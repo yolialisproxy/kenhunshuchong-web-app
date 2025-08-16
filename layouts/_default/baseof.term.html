@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Lang | default "zh-cn" }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {{- if .IsHome -}}
+            {{ site.Title }}
+        {{- else -}}
+            {{ .Title }} - {{ site.Title }}
+        {{- end -}}
+    </title>
+
+    <!-- SEO元数据 -->
+    <meta name="description" content="{{ .Description | default site.Params.description }}">
+    <meta name="keywords" content="{{ delimit .Keywords "," }}">
+    <meta name="author" content="{{ .Params.author | default site.Params.author }}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:description" content="{{ .Description | default site.Params.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ .Permalink }}">
+
+    <!-- 样式文件 -->
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+    <!-- 网站图标 -->
+    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
+</head>
+<body>
+    <!-- 导航栏 -->
+    {{ partial "header.html" . }}
+
+    <!-- 主要内容区域 -->
+    <main id="main">
+        {{ block "main" . }}
+        <!-- 子模板内容将在这里渲染 -->
+        {{ end }}
+    </main>
+
+    <!-- 页脚 -->
+    {{ partial "footer.html" . }}
+
+    <!-- JavaScript文件 -->
+    <script src="{{ "js/main.js" | relURL }}"></script>
+</body>
+</html>

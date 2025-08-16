@@ -1,0 +1,206 @@
+/*
+*   Style: Light Purple Bright Monokai Inspired
+*   主题：浅紫主色，半透明卡片，深紫背景，书卷风
+*/
+
+$color: #d8c7ff;               // 主文字浅紫
+$background-color: rgba(46, 31, 71, 0.85);    // 深紫背景，半透明
+$error-color: #bb0064;         // 错误红
+$keyword-color: #a594f9;       // 浅紫色关键词
+$text-color: $color;           // 文字主色
+$name-color: #b3deff;          // 名称淡蓝偏紫
+$literal-color: #e6db74;       // 字面量黄色
+
+$primary-bg: $background-color;
+$primary-text: $text-color;
+$secondary-text: #b8b8b8;
+$highlight-color: $keyword-color;
+
+$focus-color: $highlight-color;
+$link-hover-color: $name-color;
+
+$error-bg: rgba($error-color, 0.1);
+$error-text: $error-color;
+
+$box-shadow-light: 0 4px 12px rgba(0,0,0,0.1);
+$box-shadow-hover: 0 8px 20px rgba(0,0,0,0.15);
+
+$font-main: "Georgia", serif;
+$font-secondary: "Arial", sans-serif;
+
+$border-radius: 12px;
+$border-radius-sm: 6px;
+$transition: 0.3s ease;
+
+// ==========================================
+// 全局样式
+// ==========================================
+html {
+  font-size: 62.5%;
+  font-family: $font-main;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-size: 1.6rem;
+  font-family: $font-main;
+  color: $primary-text;
+  background-color: $primary-bg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  background-image: linear-gradient(rgba(75,59,96,0.5), rgba(106,75,123,0.5)), url('/images/background.jpg');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+// 链接与按钮
+a {
+  color: $primary-text;
+  text-decoration: none;
+  transition: color $transition;
+
+  &:hover {
+    color: $link-hover-color;
+  }
+}
+
+button, input, select, textarea {
+  font-family: $font-secondary;
+  border-radius: $border-radius-sm;
+  transition: all $transition;
+  border: 1px solid rgba(255,255,255,0.3);
+  background-color: rgba(255,255,255,0.15);
+  color: $primary-text;
+
+  &:hover {
+    background-color: rgba(255,255,255,0.25);
+    cursor: pointer;
+  }
+}
+
+// ==========================================
+// 卡片/文章列表
+// ==========================================
+.card, .post-card {
+  background-color: rgba(255,255,255,0.6); // 半透明卡片
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
+  padding: 1.5rem;
+  transition: all $transition;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: $box-shadow-hover;
+    transform: translateY(-4px);
+  }
+
+  h2, h3, .post-title {
+    color: $secondary-text;
+    margin-bottom: 0.8rem;
+  }
+
+  p, .post-summary {
+    color: $primary-text;
+    line-height: 1.6;
+  }
+
+  .tag-button {
+    display: inline-block;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.15);
+    color: $secondary-text;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all $transition;
+
+    &:hover {
+      background: rgba(165,148,249,0.2);
+      color: $primary-text;
+      border-color: rgba(165,148,249,0.3);
+    }
+  }
+}
+
+// ==========================================
+// 表单和焦点样式
+// ==========================================
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 6px $highlight-color;
+}
+
+a:focus {
+  outline: 2px solid $focus-color;
+}
+
+// ==========================================
+// 高亮/错误/成功提示
+// ==========================================
+.highlight {
+  color: $highlight-color;
+  background-color: rgba($highlight-color, 0.15);
+  padding: 0.1rem 0.3rem;
+  border-radius: $border-radius-sm;
+}
+
+.error {
+  color: $error-text;
+  background-color: $error-bg;
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius-sm;
+}
+
+.success {
+  color: #2c8a3f;
+  background-color: rgba(44,138,63,0.1);
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius-sm;
+}
+
+// ==========================================
+// 书卷风格 blockquote
+// ==========================================
+blockquote {
+  font-style: italic;
+  border-left: 4px solid $highlight-color;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+  color: $secondary-text;
+  font-family: $font-main;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: $border-radius-sm;
+}
+
+// ==========================================
+// 响应式调整
+// ==========================================
+@media (max-width: 1024px) {
+  body {
+    background-image: linear-gradient(rgba(75,59,96,0.3), rgba(106,75,123,0.3)), url('/images/background.jpg');
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 1.4rem;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+  }
+
+  .card, .post-card {
+    padding: 1rem;
+  }
+}

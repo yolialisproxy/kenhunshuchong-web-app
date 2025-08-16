@@ -1,0 +1,56 @@
+{{ define "main" }}
+<section class="archive-page">
+    <header class="archive-header">
+        <h1>文章归档</h1>
+        <p>按时间顺序浏览所有文章（共 {{ len site.RegularPages }} 篇）</p>
+    </header>
+
+    <!-- 年度统计 -->
+    <div class="archive-stats">
+        {{ $years := slice }}
+        {{ range site.RegularPages }}
+            {{ $year := .Date.Format "2006" }}
+            {{ $years = $years | append $year }}
+        {{ end }}
+
+        {{ range $year, $posts := (group $years "." | sort) }}
+            <div class="year-stat">
+                <span class="year">{{ $year }}</span>
+                <span class="count">{{ len $posts }} 篇</span>
+            </div>
+        {{ end }}
+    </div>
+
+    <!-- 按年月分组的文章列表 -->
+    {{ range site.RegularPages.GroupByDate "2006" }}
+        <div class="archive-year">
+            <h2 class="archive-year-title">{{ .Key }}</h2>
+
+            {{ range .Pages.GroupByDate "January" }}
+                <div class="archive-month">
+                    <h3 class="archive-month-title">{{ .Key }}</h3>
+
+                    <div class="archive-posts">
+                        {{ range .Pages }}
+                            <article class="archive-post">
+                                <time class="archive-date">{{ .Date.Format "01-02" }}</time>
+                                <h4 class="archive-title">
+                                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                                </h4>
+
+                                {{ with .GetTerms "categories" }}
+                                    <span class="archive-category">
+                                        {{ range first 1 . }}
+                                            [{{ .LinkTitle }}]
+                                        {{ end }}
+                                    </span>
+                                {{ end }}
+                            </article>
+                        {{ end }}
+                    </div>
+                </div>
+            {{ end }}
+        </div>
+    {{ end }}
+</section>
+{{ end }}

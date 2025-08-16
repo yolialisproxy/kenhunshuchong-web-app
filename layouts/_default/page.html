@@ -1,0 +1,101 @@
+{{ define "main" }}
+<article class="post-single">
+    <!-- 文章头部信息 -->
+    <header class="post-header">
+        <h1 class="post-title">{{ .Title }}</h1>
+
+        <!-- 文章元信息 -->
+        <div class="post-meta">
+            {{ with .Date }}
+                {{ $dateMachine := .Format "2006-01-02T15:04:05-07:00" }}
+                {{ $dateHuman := .Format "2006年01月02日" }}
+                <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+            {{ end }}
+
+            <!-- 作者信息 -->
+            {{ with .Params.author }}
+                <span class="post-author">作者：{{ . }}</span>
+            {{ end }}
+
+            <!-- 阅读时间 -->
+            {{ with .ReadingTime }}
+                <span class="reading-time">阅读时间：{{ . }} 分钟</span>
+            {{ end }}
+
+            <!-- 字数统计 -->
+            <span class="word-count">字数：{{ .WordCount }}</span>
+        </div>
+
+        <!-- 文章分类和标签 -->
+        <div class="post-terms">
+            <!-- 分类 -->
+            {{ with .GetTerms "categories" }}
+                <div class="post-categories">
+                    <span class="term-title">分类：</span>
+                    {{ range . }}
+                        <a href="{{ .RelPermalink }}" class="category-link">{{ .LinkTitle }}</a>
+                    {{ end }}
+                </div>
+            {{ end }}
+
+            <!-- 标签 -->
+            {{ with .GetTerms "tags" }}
+                <div class="post-tags">
+                    <span class="term-title">标签：</span>
+                    {{ range . }}
+                        <a href="{{ .RelPermalink }}" class="tag-link">#{{ .LinkTitle }}</a>
+                    {{ end }}
+                </div>
+            {{ end }}
+        </div>
+    </header>
+
+    <!-- 文章内容 -->
+    <div class="post-content">
+        {{ .Content }}
+    </div>
+
+    <!-- 回复 -->
+    <div class="disqus-container">
+        {{ partial "comments.html" . }}
+    </div>
+
+    <!-- 文章底部导航 -->
+    <nav class="post-nav">
+        {{ with .PrevInSection }}
+            <div class="post-nav-prev">
+                <a href="{{ .RelPermalink }}" rel="prev">
+                    <span class="post-nav-label">← 上一篇</span>
+                    <span class="post-nav-title">{{ .Title }}</span>
+                </a>
+            </div>
+        {{ end }}
+
+        {{ with .NextInSection }}
+            <div class="post-nav-next">
+                <a href="{{ .RelPermalink }}" rel="next">
+                    <span class="post-nav-label">下一篇 →</span>
+                    <span class="post-nav-title">{{ .Title }}</span>
+                </a>
+            </div>
+        {{ end }}
+    </nav>
+</article>
+
+<!-- 相关文章推荐 -->
+{{ $related := .Site.RegularPages.Related . | first 3 }}
+{{ with $related }}
+<section class="related-posts">
+    <h3>相关文章</h3>
+    <div class="related-posts-grid">
+        {{ range . }}
+            <article class="related-post">
+                <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+                <time>{{ .Date.Format "2006-01-02" }}</time>
+                <p>{{ .Summary | truncate 100 }}</p>
+            </article>
+        {{ end }}
+    </div>
+</section>
+{{ end }}
+{{ end }}

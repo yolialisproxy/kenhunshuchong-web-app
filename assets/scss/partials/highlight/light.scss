@@ -1,0 +1,179 @@
+/*
+*   Style: Monokailight Inspired - Light Purple Bright Theme
+*   主调浅紫，背景半透明，书卷风格
+*/
+
+$color: #cbc1ff;              // 主文字色-柔和浅紫
+$background-color: rgba(42, 31, 68, 0.85);   // 深紫背景，半透明
+$error-color: #940050;        // 错误色
+$keyword-color: #a59fff;      // 关键词色-浅紫灰
+$text-color: #2b2b2b;         // 主要文本色-深灰
+$name-color: #91b65d;         // 名称色-墨绿色
+$literal-color: #d8a72b;      // 字面量色-土黄色
+
+$primary-bg: $background-color;
+$primary-text: $text-color;
+$secondary-text: $color;
+$highlight-color: $keyword-color;
+
+$focus-color: $highlight-color;
+$link-hover-color: $name-color;
+
+$error-bg: rgba($error-color, 0.1);
+$error-text: $error-color;
+
+$box-shadow-light: 0 4px 12px rgba(106, 68, 173, 0.1);
+$box-shadow-hover: 0 8px 20px rgba(106, 68, 173, 0.15);
+
+$font-main: "Georgia", serif;
+$font-secondary: "Arial", sans-serif;
+
+$border-radius: 12px;
+$border-radius-sm: 6px;
+$transition: 0.3s ease;
+
+// ==========================================
+// 全局样式
+// ==========================================
+html {
+  font-size: 62.5%;
+  font-family: $font-main;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $primary-bg;
+  color: $primary-text;
+  font-size: 1.6rem;
+  margin: 0;
+  font-family: $font-main;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+
+  background-image: linear-gradient(rgba(75, 59, 96, 0.4), rgba(106, 75, 123, 0.4)), url('/images/background.jpg');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+// 链接与交互元素
+a {
+  text-decoration: none;
+  color: $primary-text;
+  transition: color $transition;
+
+  &:hover {
+    color: $link-hover-color;
+  }
+}
+
+button, input, select, textarea {
+  font-family: $font-secondary;
+  border-radius: $border-radius-sm;
+  transition: all $transition;
+}
+
+// ==========================================
+// 表单焦点与状态
+// ==========================================
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 6px $highlight-color;
+}
+
+a:focus {
+  outline: 2px solid $focus-color;
+}
+
+// ==========================================
+// 错误/成功提示
+// ==========================================
+.error {
+  color: $error-text;
+  background-color: $error-bg;
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius-sm;
+}
+
+.success {
+  color: #2c8a3f;
+  background-color: rgba(44, 138, 63, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius-sm;
+}
+
+// ==========================================
+// 书卷风格特殊设计
+// ==========================================
+blockquote {
+  font-style: italic;
+  border-left: 4px solid $highlight-color;
+  padding-left: 1.2rem;
+  margin: 0;
+  color: $secondary-text;
+  font-family: $font-main;
+  background-color: rgba(255, 255, 255, 0.1); // 半透明背景
+  border-radius: $border-radius-sm;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+// ==========================================
+// 卡片/内容区域
+// ==========================================
+.card {
+  background: rgba(255, 255, 255, 0.6); // 半透明卡片
+  color: $primary-text;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
+  transition: all $transition;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: $box-shadow-hover;
+    transform: translateY(-4px);
+  }
+
+  h2, h3 {
+    color: $secondary-text;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+}
+
+// ==========================================
+// 高亮文本
+// ==========================================
+.highlight {
+  color: $highlight-color;
+  background-color: rgba($highlight-color, 0.15);
+  padding: 0.1rem 0.3rem;
+  border-radius: $border-radius-sm;
+}
+
+// ==========================================
+// 响应式
+// ==========================================
+@media (max-width: 1024px) {
+  body {
+    background-image: linear-gradient(rgba(75, 59, 96, 0.3), rgba(106, 75, 123, 0.3)), url('/images/background.jpg');
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 1.4rem;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+  }
+}

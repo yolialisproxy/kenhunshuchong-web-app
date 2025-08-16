@@ -1,0 +1,309 @@
+// ===============================
+// 文章列表页样式（浅紫明亮书卷风）
+// ===============================
+
+// 变量 (可根据您的主样式文件调整)
+$primary-medium-purple: #9353d3;
+$primary-dark-purple: #5227ad;
+$text-dark: #2a2a2a;
+$text-meta: #666;
+
+// ===== 变量定义 =====
+:root {
+  --deep-purple: rgba(142, 68, 173, 0.85); // 稍浅，更明亮
+  --light-purple: rgba(243, 229, 245, 0.6); // 半透明浅紫背景
+  --medium-purple: rgba(200, 150, 230, 0.7);
+  --accent-purple: #b089ff; // 浅亮紫强调色
+  --text: #2b2b2b;
+  --text-muted: #6b6f76;
+  --text-light: #fff;
+  --bg-card: rgba(255, 255, 255, 0.6); // 半透明卡片背景
+  --shadow: 0 6px 16px rgba(142, 68, 173, 0.12);
+  --shadow-hover: 0 10px 28px rgba(142, 68, 173, 0.18);
+  --border: rgba(158, 105, 255, 0.4);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --transition: 0.3s ease;
+}
+
+// ===== 文章列表容器 =====
+.post-list-container {
+  max-width: var(--container-wide, 1200px);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+
+  > h1 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text);
+  }
+}
+
+// ===== 文章列表网格 =====
+.post-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+// ===== 文章卡片 =====
+.post-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all var(--transition);
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+
+    .post-title {
+      color: var(--accent-purple);
+    }
+  }
+
+  // 封面图
+  .post-card-title {
+    font-size: 1.9rem;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--light-purple);
+    border-bottom: 1px solid var(--border);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: brightness(1);
+    }
+
+    &:hover img {
+      transform: scale(1.03);
+      filter: brightness(1.05);
+    }
+  }
+
+  // 卡片内容
+  .post-link {
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+    padding: 1.5rem;
+    flex-grow: 1;
+    transition: color var(--transition);
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  // 标题
+  .post-title {
+    font-size: clamp(1.55rem, 2vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+    transition: color var(--transition);
+  }
+
+  // 元信息
+  .post-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+  }
+
+  // 摘要
+  .post-summary {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  // 标签
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto; // 推到底部
+  }
+
+  .tag-button {
+    display: inline-block;
+    font-size: 0.95rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(243, 229, 245, 0.4); // 半透明
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--accent-purple);
+      color: var(--text-light);
+      border-color: var(--accent-purple);
+    }
+  }
+}
+
+// ===== 响应式 =====
+@media (max-width: 768px) {
+  .post-list-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .post-card .post-link {
+    padding: 1.25rem;
+  }
+}
+
+// ===== 暗色模式 =====
+@media (prefers-color-scheme: dark) {
+  .post-card {
+    background: rgba(120, 60, 180, 0.6);
+    border-color: rgba(200, 150, 230, 0.5);
+
+    .tag-button {
+      background: rgba(120, 60, 180, 0.5);
+    }
+  }
+}
+
+
+// 列表页外层容器
+.list-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+// 列表页头部
+.list-header {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-bottom: 3rem;
+    background: rgba($primary-medium-purple, 0.05); // 与网站背景融合 [4][5]
+    border-radius: $radius;
+    border: 1px solid rgba($primary-medium-purple, 0.1);
+}
+
+.list-title {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: $primary-dark-purple;
+    margin-bottom: 1rem;
+}
+
+.list-description {
+    font-size: 1.1rem;
+    color: $text-meta;
+    max-width: 600px;
+    margin: 0 auto 1rem;
+}
+
+.list-meta {
+    color: $primary-medium-purple;
+    font-weight: 500;
+}
+
+// 可复用的卡片 partial 样式
+.card-link-wrapper {
+    text-decoration: none;
+    color: inherit;
+    display: block; // 确保链接占据整个网格单元
+    height: 100%;
+}
+
+.card-cover {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+
+    &--placeholder {
+        filter: grayscale(50%) contrast(80%) brightness(110%);
+        opacity: 0.8;
+    }
+
+    .card-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .post-card:hover & .card-thumb {
+        transform: scale(1.05);
+    }
+}
+
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: $text-dark;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.card-summary {
+    font-size: 0.95rem;
+    color: $text-meta;
+    line-height: 1.7;
+    flex-grow: 1; // 将摘要区域推满，日期就会在底部
+    margin-bottom: 1rem;
+}
+
+.card-meta {
+    margin-top: auto; // 确保 meta 始终在卡片底部
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+    font-size: 0.85rem;
+    color: $text-meta;
+}
+
+// 网格布局 (与 posts.scss 复用)
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
