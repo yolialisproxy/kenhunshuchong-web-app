@@ -1,39 +1,38 @@
-{{/* =================================================================
-    layouts/partials/comments.html - 自定义匿名评论表单
-    - 前端表单: 收集评论数据 (姓名、邮箱可选)
-    - 包含 POST URL 配置，需要与后端服务对应
-================================================================= */}}
-
-<div class="comments-section" id="comments">
-    <h3 class="comments-title">发表评论</h3>
-    <p class="comments-description">您的观点对我们很重要！支持匿名评论。</p>
-
-    <form class="comment-form" id="comment-form">
-        <input type="hidden" name="page_id" value="{{ .Permalink }}"> {{/* 隐藏字段，用于识别评论属于哪个页面 */}}
-        <input type="hidden" name="page_title" value="{{ .Title }}">
-
-        <div class="form-group">
-            <label for="comment-name">姓名 (可选):</label>
-            <input type="text" id="comment-name" name="name" placeholder="匿名用户" class="form-input">
+<section id="comments">
+  <h3>评论</h3>
+  <form method="POST" action="https://staticman-repo.onrender.com/v3/entry/github/yolialisproxy/staticman-repo/main/comments">
+    <input type="hidden" name="options[redirect]" value="{{ .Permalink }}#comment-submitted">
+    <input type="hidden" name="options[slug]" value="{{ .File.BaseFileName }}">
+    <p>
+      <label for="name">姓名 *:</label>
+      <input type="text" name="fields[name]" id="name" required>
+    </p>
+    <p>
+      <label for="email">邮箱（不会公开） *:</label>
+      <input type="email" name="fields[email]" id="email" required>
+    </p>
+    <p>
+      <label for="comment">评论 *:</label>
+      <textarea name="fields[comment]" id="comment" required rows="5"></textarea>
+    </p>
+    <p>
+      <input type="submit" value="提交">
+    </p>
+  </form>
+  <div id="comment-submitted" style="display:none;">
+    <h3>感谢提交！</h3>
+    <p>评论已提交，待审核通过后显示。</p>
+  </div>
+  {{ if .Site.Data.comments }}
+    {{ $comments := index .Site.Data.comments .File.BaseFileName }}
+    {{ if $comments }}
+      <h3>评论 ({{ len $comments }})</h3>
+      {{ range $comments }}
+        <div>
+          <p><strong>{{ .name }}</strong>: {{ .comment | markdownify }}</p>
+          <small>{{ .date | dateFormat "2006-01-02 15:04" }}</small>
         </div>
-
-        <div class="form-group">
-            <label for="comment-email">邮箱 (可选):</label>
-            <input type="email" id="comment-email" name="email" placeholder="不会公开" class="form-input">
-        </div>
-
-        <div class="form-group">
-            <label for="comment-content">评论内容 (<span class="required-star">*</span>):</label>
-            <textarea id="comment-content" name="content" rows="6" required class="form-input" placeholder="请在这里输入您的评论..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn--primary">提交评论</button>
-        <div id="comment-message" class="comment-message"></div>
-    </form>
-
-    <h3 class="comments-list-title">所有评论</h3>
-    <div class="comments-list" id="comments-list">
-        <p>加载评论中...</p>
-        {{/* 评论会通过 JavaScript 动态加载或在站点重建后显示 */}}
-    </div>
-</div>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</section>

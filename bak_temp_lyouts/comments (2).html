@@ -1,0 +1,39 @@
+{{/* =================================================================
+    layouts/partials/comments.html - 自定义匿名评论表单
+    - 前端表单: 收集评论数据 (姓名、邮箱可选)
+    - 包含 POST URL 配置，需要与后端服务对应
+================================================================= */}}
+
+<div class="comments-section" id="comments">
+    <h3 class="comments-title">发表评论</h3>
+    <p class="comments-description">您的观点对我们很重要！支持匿名评论。</p>
+
+    <form class="comment-form" id="comment-form">
+        <input type="hidden" name="page_id" value="{{ .Permalink }}"> {{/* 隐藏字段，用于识别评论属于哪个页面 */}}
+        <input type="hidden" name="page_title" value="{{ .Title }}">
+
+        <div class="form-group">
+            <label for="comment-name">姓名 (可选):</label>
+            <input type="text" id="comment-name" name="name" placeholder="匿名用户" class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="comment-email">邮箱 (可选):</label>
+            <input type="email" id="comment-email" name="email" placeholder="不会公开" class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="comment-content">评论内容 (<span class="required-star">*</span>):</label>
+            <textarea id="comment-content" name="content" rows="6" required class="form-input" placeholder="请在这里输入您的评论..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary">提交评论</button>
+        <div id="comment-message" class="comment-message"></div>
+    </form>
+
+    <h3 class="comments-list-title">所有评论</h3>
+    <div class="comments-list" id="comments-list">
+        <p>加载评论中...</p>
+        {{/* 评论会通过 JavaScript 动态加载或在站点重建后显示 */}}
+    </div>
+</div>
