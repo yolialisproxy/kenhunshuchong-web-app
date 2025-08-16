@@ -1,0 +1,35 @@
+name: Moderate Comments
+on:
+  pull_request:
+    types: [opened, synchronize]
+jobs:
+  moderate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check for banned words
+        run: |
+          BANNED_WORDS=("广告" "博彩" "色情" "链接" "http" "www.")
+          PR_FILES=$(git diff --name-only origin/main)
+          for file in $PR_FILES; do
+            if [[ $file == data/comments/* ]]; then
+              for word in "${BANNED_WORDS[@]}"; do
+                if grep -i "$word" "$file"; then
+                  echo "Comment contains banned word: $word"
+                  echo "Comment rejected" >> $GITHUB_STEP_SUMMARY
+                  curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                    -d '{"state":"closed","body":"Comment rejected due to banned word: '"$word"'"}' \
+                    "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$GITHUB_PR_NUMBER"
+                  exit 1
+                fi
+              done
+            fi
+          done
+          echo "Comment approved" >> $GITHUB_STEP_SUMMARY
+      - name: Auto-merge approved comment
+        if: success()
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          commit-message: "Auto-merge approved comment"
